@@ -1,0 +1,26 @@
+footer {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 20px;
+    margin: auto;
+    //Pegar al fondo
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+
+    a {
+        margin-right: 20px;
+        margin-top: auto;
+        margin-bottom: auto;
+
+        @media (max-width: 250px) {
+            margin-right: 2px;
+        }
+    }
+
+    i {
+        @extend a;
+    }
+}

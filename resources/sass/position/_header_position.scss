@@ -1,0 +1,41 @@
+@use '../global/variables';
+@use '../global/mixins';
+@use "sass:map";
+
+header {
+    display: block;
+    @include mixins.dinamic-banner();
+
+    #logo {
+        margin-top: map.get(variables.$padding, "medium");
+    }
+
+    .banner {
+        section {
+            margin-top: map.get(variables.$padding, "medium");
+
+            button {
+                padding: map.get(variables.$padding, "small");
+            }
+
+            #loginIcon {
+                @include mixins.dinamic-text-size(3em);
+                vertical-align: middle;
+            }
+        }
+
+    }
+
+    .menu {
+        display: flex;
+        justify-content: space-between;
+
+        a {
+            text-align: center;
+            padding-top: map.get(variables.$padding, "medium");
+            padding-bottom: map.get(variables.$padding, "medium");
+            width: 20%;
+        }
+    }
+
+}
