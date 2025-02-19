@@ -6,6 +6,9 @@ header {
     display: block;
     @include mixins.dinamic-banner();
 
+    h1 {
+        margin: 0;
+    }
     #logo {
         margin-top: map.get(variables.$padding, "medium");
     }

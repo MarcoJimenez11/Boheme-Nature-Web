@@ -10,7 +10,7 @@
 
 <body>
   <header>
-    <h1>Marcodona</h1>
+  <h1>Marcodona</h1>
     <nav>
       <a href="{{ route('shop') }}">Tienda</a>
       <a href="">Pedidos</a>
