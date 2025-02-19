@@ -327,26 +327,10 @@ header {
   background-color: #296db0;
   color: #e9f6ff;
 }
-
-#logo {
-  cursor: pointer;
-}
-
-#loginIcon {
-  cursor: pointer;
-  border: 2px;
-  border-style: solid;
-  border-radius: 50%;
-  border-color: #171717;
-}
-#loginIcon:hover {
-  box-shadow: 2px 2px 2px #171717;
-}
-
-.menu a {
+header nav a {
   color: #e9f6ff;
 }
-.menu a:hover {
+header nav a:hover {
   background-color: #1d4c7b;
 }
 
@@ -401,112 +385,11 @@ footer i {
 }
 
 header {
-  display: block;
-  /*
-      Para pantallas anchas, mantiene el logo centrado y los botones alineados a la derecha
-  */
-  /*
-      Para pantallas estrechas, mantiene el logo alineado a la izquierda y los botones a la derecha
-  */
-  /*
-      Para pantallas muy estrechas, mantiene estructura de bloque con un elemento por cada fila
-  */
-}
-@media (min-width: 768px) {
-  header .banner {
-    position: relative;
-    height: 10vh;
-  }
-  header .banner #logo {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  header .banner section {
-    position: absolute;
-    right: 20px;
-  }
-}
-@media (max-width: 767px) {
-  header .banner {
-    display: flex;
-    justify-content: space-between;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-}
-@media (max-width: 344px) {
-  header .banner {
-    display: block;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  header .banner #logo {
-    text-align: center;
-  }
-  header .banner section {
-    text-align: center;
-  }
-}
-header h1 {
-  margin: 0;
-}
-header #logo {
-  margin-top: 20px;
-}
-header .banner section {
-  margin-top: 20px;
-}
-header .banner section button {
-  padding: 10px;
-}
-header .banner section #loginIcon {
-  vertical-align: middle;
-}
-@media (min-width: 1640px) {
-  header .banner section #loginIcon {
-    font-size: 3.6em;
-  }
-}
-@media (max-width: 1639px) {
-  header .banner section #loginIcon {
-    font-size: 3em;
-  }
-}
-@media (max-width: 480px) {
-  header .banner section #loginIcon {
-    font-size: 2em;
-  }
-}
-@media (max-width: 480px) {
-  header .banner section #loginIcon {
-    font-size: 2em;
-  }
-}
-@media (max-width: 250px) {
-  header .banner section #loginIcon {
-    font-size: 1.2em;
-  }
-}
-@media (max-width: 170px) {
-  header .banner section #loginIcon {
-    font-size: 1em;
-  }
-}
-@media (max-width: 100px) {
-  header .banner section #loginIcon {
-    font-size: 0.75em;
-  }
-}
-header .menu {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
-header .menu a {
-  text-align: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  width: 20%;
+header nav a {
+  margin-right: 10px;
 }
 
 html {

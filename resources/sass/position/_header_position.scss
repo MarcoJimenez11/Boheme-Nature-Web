@@ -3,42 +3,17 @@
 @use "sass:map";
 
 header {
-    display: block;
-    @include mixins.dinamic-banner();
+    display: flex;
+    justify-content: space-around;
 
     h1 {
-        margin: 0;
-    }
-    #logo {
-        margin-top: map.get(variables.$padding, "medium");
+        
     }
 
-    .banner {
-        section {
-            margin-top: map.get(variables.$padding, "medium");
+    nav {
 
-            button {
-                padding: map.get(variables.$padding, "small");
-            }
-
-            #loginIcon {
-                @include mixins.dinamic-text-size(3em);
-                vertical-align: middle;
-            }
-        }
-
-    }
-
-    .menu {
-        display: flex;
-        justify-content: space-between;
-
-        a {
-            text-align: center;
-            padding-top: map.get(variables.$padding, "medium");
-            padding-bottom: map.get(variables.$padding, "medium");
-            width: 20%;
+        a{
+            margin-right: 10px;
         }
     }
-
 }
