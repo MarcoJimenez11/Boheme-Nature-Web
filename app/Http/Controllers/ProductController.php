@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use Throwable;
+use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
@@ -65,7 +66,7 @@ class ProductController extends Controller
     {
         $data = request()->validate([
             'productCategory' => 'required',
-            'productName' => ['required', 'unique:products,name'],
+            'productName' => ['required', Rule::unique('products','name')->ignore($product->id)],
             'productDescription' => 'required',
             'productPrice' => ['required', 'min:0'],
             'productStock' => ['required', 'min:0'],
@@ -102,5 +103,11 @@ class ProductController extends Controller
         }
         
         return redirect()->route('productList');
+    }
+
+    public function listByCategory(Category $category){
+        return view('product.list')
+        ->with("products", Product::where('category_id','=', $category->id)->orderBy('name')->get())
+        ->with("categories", Category::orderBy('name')->get());
     }
 }

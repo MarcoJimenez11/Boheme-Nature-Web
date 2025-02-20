@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use Throwable;
+use Illuminate\Validation\Rule;
 
 use function Laravel\Prompts\alert;
 
@@ -48,9 +49,10 @@ class CategoryController extends Controller
     public function editPut(Category $category)
     {
         $data = request()->validate([
-            'categoryName' => 'required',
+            'categoryName' => ['required', Rule::unique('categories','name')->ignore($category->id)],
         ], [
             'categoryName.required' => 'El campo nombre es obligatorio',
+            'categoryName.unique' => 'Ya existe una categoría con ese nombre',
         ]);
 
         $category->update(['name' => $data['categoryName']]);

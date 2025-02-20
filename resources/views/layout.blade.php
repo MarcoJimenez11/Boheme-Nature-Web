@@ -15,7 +15,7 @@
       <a href="">Tienda</a>
       <a href="{{ route('orderList') }}">Pedidos</a>
       @forelse($categories as $category)
-      <a href="">{{ $category->name }}</a>
+      <a href="{{ route('productListByCategory',$category) }}">{{ $category->name }}</a>
       @empty
       <p>No hay categorías.</p>
       @endforelse
