@@ -12,12 +12,12 @@
   <header>
     <h1><a href="{{ route('home') }}">Marcodona</a></h1>
     <nav>
-      <a href="{{ route('shop') }}">Tienda</a>
-      <a href="">Pedidos</a>
+      <a href="">Tienda</a>
+      <a href="{{ route('orderList') }}">Pedidos</a>
       @forelse($categories as $category)
-      <a href="{{ route('shop') }}">{{ $category->name }}</a>
+      <a href="">{{ $category->name }}</a>
       @empty
-      <p>No hay usuarios registrados.</p>
+      <p>No hay categorías.</p>
       @endforelse
 
       <!-- Esta etiqueta Blade equivale a un condicional en caso de estar autenticado el usuario (Auth) -->
@@ -38,6 +38,7 @@
       <nav>
         <a href="{{ route('register') }}">Registro</a>
         <a href="{{ route('categoryList') }}">Gestionar Categorías</a>
+        <a href="{{ route('productList') }}">Gestionar Productos</a>
       </nav>
           
       @endif

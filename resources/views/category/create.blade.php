@@ -19,7 +19,7 @@
         @csrf
 
         <label for="categoryName">Nombre</label>
-        <input type="text" name="categoryName">
+        <input type="text" name="categoryName" value="{{ old('categoryName') }}">
 
         <button type="submit">Crear</button>
     </form>

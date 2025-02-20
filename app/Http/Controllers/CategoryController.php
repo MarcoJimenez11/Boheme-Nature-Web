@@ -25,9 +25,10 @@ class CategoryController extends Controller
     public function createPost()
     {
         $data = request()->validate([
-            'categoryName' => 'required',
+            'categoryName' => ['required', 'unique:categories,name'],
         ], [
             'categoryName.required' => 'El campo nombre es obligatorio',
+            'categoryName.unique' => 'Ya existe una categoría con ese nombre',
         ]);
 
         Category::create([

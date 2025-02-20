@@ -18,10 +18,10 @@
         @csrf
 
         <label for="userName">Nombre de usuario</label>
-        <input type="text" name="userName">
+        <input type="text" name="userName" value="{{ old('userName') }}">
 
         <label for="userEmail">Correo electrónico</label>
-        <input type="email" name="userEmail">
+        <input type="email" name="userEmail" value="{{ old('userEmail') }}">
 
         <label for="userPassword">Contraseña</label>
         <input type="password" name="userPassword">
