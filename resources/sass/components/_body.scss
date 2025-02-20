@@ -2,4 +2,9 @@
 
 body {
     background-color: variables.$color-neutro;
+
+    .errorList {
+        background-color: variables.$color-error;
+        color: variables.$color-neutro;
+    }
 }

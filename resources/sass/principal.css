@@ -337,6 +337,10 @@ header nav a:hover {
 body {
   background-color: #e9f6ff;
 }
+body .errorList {
+  background-color: #d11f1f;
+  color: #e9f6ff;
+}
 
 footer {
   background-color: #296db0;

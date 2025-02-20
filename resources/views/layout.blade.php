@@ -5,12 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Marcodona</title>
-  <link href="../resources/sass/principal.css" rel="stylesheet">
+  <link href="{{ asset('../resources/sass/principal.css') }}" rel="stylesheet">
 </head>
 
 <body>
   <header>
-    <h1>Marcodona</h1>
+    <h1><a href="{{ route('home') }}">Marcodona</a></h1>
     <nav>
       <a href="{{ route('shop') }}">Tienda</a>
       <a href="">Pedidos</a>
@@ -22,31 +22,32 @@
 
       <!-- Esta etiqueta Blade equivale a un condicional en caso de estar autenticado el usuario (Auth) -->
       @auth
-      <p>Bienvenid@ {{ Auth::user()->name }}</p>
-      <a href="{{ route('logout') }}">Cerrar Sesión</a>
-      @if (Auth::user()->is_admin)
-      Soy admin
-      @else
-      No soy nada
-      @endif
+        <p>Bienvenid@ {{ Auth::user()->name }}</p>
+        <a href="{{ route('logout') }}">Cerrar Sesión</a>
       @endauth
 
       @guest
-      <a href="{{ route('login') }}">Iniciar Sesión</a>
-      <a href="{{ route('register') }}">Registro</a>
+        <a href="{{ route('login') }}">Iniciar Sesión</a>
+        <a href="{{ route('register') }}">Registro</a>
       @endguest
 
-
-
-
     </nav>
+    @auth
+      @if (Auth::user()->is_admin)
+      <h2>Menú de Administrador</h2>
+      <nav>
+        <a href="{{ route('register') }}">Registro</a>
+        <a href="{{ route('categoryList') }}">Gestionar Categorías</a>
+      </nav>
+          
+      @endif
+    @endauth
+
   </header>
 
   <main>
 
     @yield('content')
-
-
 
   </main>
 
