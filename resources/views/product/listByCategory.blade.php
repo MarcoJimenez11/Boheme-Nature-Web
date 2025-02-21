@@ -1,7 +1,3 @@
-<?php 
-use App\Models\Category;
-?>
-
 @extends('layout')
 
 @section('content')
@@ -22,7 +18,6 @@ use App\Models\Category;
 
     <table>
         <thead>
-            <th>Categoría</th>
             <th>Producto</th>
             <th>Descripción</th>
             <th>Precio</th>
@@ -33,20 +28,18 @@ use App\Models\Category;
         <tbody>
             @foreach ($products as $product)
                 <tr>
-                    <td>{{ Category::find($product->category_id)->name }}</td>
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->description }}</td>
                     <td>{{ $product->price }}</td>
                     <td>{{ $product->stock }}</td>
                     <td>{{ $product->image }}</td>
 
-                    <td><a href="{{ route('productEdit', $product) }}">Editar</a></td>
                     <td>
-                        <form method="POST" action="{{ route('productDelete', $product) }}">
+                        <a href="{{ route('cartAdd', $product) }}">Añadir al carrito</a>
+                        {{-- <form method="POST" action="{{ route('cartAdd', ['name' => $product->name, 'price' => $product->price, 'amount' => 1]) }}">
                             @csrf
-                            @method('DELETE')
-                            <button type="submit">Eliminar</button>
-                        </form>
+                            <button type="submit">Añadir al carrito</button>
+                        </form> --}}
                     </td>
                 </tr>
             @endforeach

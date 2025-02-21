@@ -9,4 +9,15 @@ class OrderLine extends Model
 {
     /** @use HasFactory<\Database\Factories\OrderLineFactory> */
     use HasFactory;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
+     */
+    protected $fillable = [
+        'order_id',
+        'product_id',
+        'amount',
+    ];
 }

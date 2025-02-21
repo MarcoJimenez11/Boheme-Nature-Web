@@ -25,8 +25,8 @@
             @foreach ($categories as $category)
                 <tr>
                     <td>{{ $category->name }} </td>
-                    <td><a href="{{ route('categoryEdit', $category) }}">Editar</a></td>
                     <td>
+                        <a href="{{ route('categoryEdit', $category) }}">Editar</a>
                         <form method="POST" action="{{ route('categoryDelete', $category) }}">
                             @csrf
                             @method('DELETE')

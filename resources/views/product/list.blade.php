@@ -1,4 +1,4 @@
-<?php 
+<?php
 use App\Models\Category;
 ?>
 
@@ -40,8 +40,8 @@ use App\Models\Category;
                     <td>{{ $product->stock }}</td>
                     <td>{{ $product->image }}</td>
 
-                    <td><a href="{{ route('productEdit', $product) }}">Editar</a></td>
                     <td>
+                        <a href="{{ route('productEdit', $product) }}">Editar</a>
                         <form method="POST" action="{{ route('productDelete', $product) }}">
                             @csrf
                             @method('DELETE')
