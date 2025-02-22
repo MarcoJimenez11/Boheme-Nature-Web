@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('province');
             $table->string('locality');
             $table->string('direction');
-            $table->decimal('cost', 10, 2)->unsigned();
+            // $table->decimal('cost', 10, 2)->unsigned();
             $table->string('status')->default('Pendiente');
             $table->timestamps();
         });

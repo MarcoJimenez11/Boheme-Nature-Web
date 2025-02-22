@@ -19,18 +19,18 @@ use App\Models\Product;
 
 
     @if (!is_null($cartItems))
-        @forelse ($cartItems as $key => $item)
-            <h2>Lista de productos</h2>
+        <h2>Lista de productos</h2>
 
-            <table>
-                <thead>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Precio unidad</th>
-                    <th>Precio total</th>
-                    <th>Acciones</th>
-                </thead>
-                <tbody>
+        <table>
+            <thead>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio unidad</th>
+                <th>Precio total</th>
+                <th>Acciones</th>
+            </thead>
+            <tbody>
+                @forelse ($cartItems as $key => $item)
                     <tr>
                         <td>{{ Product::find($item['id'])->name }}</td>
                         <td>{{ $item['amount'] }}</td>
@@ -55,24 +55,23 @@ use App\Models\Product;
                             </form>
                         </td>
                     </tr>
-                </tbody>
+                @empty
+                    No hay ningún producto en el carrito
+                @endforelse
+            </tbody>
 
-            </table>
-            <form method="POST" action="{{ route('cartDeleteAll') }}">
-                @csrf
-                @method('DELETE')
-                <button type="submit">Vaciar carrito</button>
-            </form>
-            @auth
-            <a href="">Confirmar pedido</a>
-            @endauth
-            @guest
-            <a href="">Inicia sesión para confirmar pedido</a>
-            @endguest
-            
-        @empty
-            No hay ningún producto en el carrito
-        @endforelse
+        </table>
+        <form method="POST" action="{{ route('cartDeleteAll') }}">
+            @csrf
+            @method('DELETE')
+            <button type="submit">Vaciar carrito</button>
+        </form>
+        @auth
+            <a href="{{ route('orderCreate') }}">Confirmar pedido</a>
+        @endauth
+        @guest
+            <a href="{{ route('login') }}">Inicia sesión para confirmar pedido</a>
+        @endguest
     @else
         No hay ningún producto en el carrito
     @endif

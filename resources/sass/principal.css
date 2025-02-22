@@ -138,7 +138,18 @@ html body {
 }
 html body main {
   display: flex;
+  justify-content: center;
+}
+html body main #content h2 {
+  text-align: center;
+}
+html body main #content form {
+  display: flex;
   flex-direction: column;
+  max-width: 100%;
+}
+html body main #content form input {
+  margin-bottom: 10px;
 }
 
 footer {

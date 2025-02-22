@@ -20,7 +20,6 @@ class Order extends Model
         'province',
         'locality',
         'direction',
-        'cost',
         'status',
         'created_at'
     ];

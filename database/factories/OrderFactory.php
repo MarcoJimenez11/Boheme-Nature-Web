@@ -24,7 +24,6 @@ class OrderFactory extends Factory
             'province' => fake()->country(),
             'locality' => fake()->city(),
             'direction' => fake()->streetAddress(),
-            'cost' => fake()->numberBetween(0,1000),
             'status' => 'Recibido',
         ];
     }

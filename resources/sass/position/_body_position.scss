@@ -8,7 +8,23 @@ html {
 
         main {
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            #content {
+                
+                h2 {
+                    text-align: center;
+                }
+                form {
+                    display: flex;
+                    flex-direction: column;
+                    max-width: 100%;
+
+                    input {
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+
         }
 
         // #categories {

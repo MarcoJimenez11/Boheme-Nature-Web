@@ -37,4 +37,7 @@ Route::get('/cart/add/{product}', [CartController::class, 'addItem'])->name('car
 Route::delete('/cart/delete/{item}', [CartController::class, 'deleteItem'])->name('cartItemDelete');
 Route::put('/cart/change/{item}/{amount}', [CartController::class, 'changeAmountItem'])->name('changeAmountItem');
 Route::delete('/cart/delete/', [CartController::class, 'deleteAll'])->name('cartDeleteAll');
+
 Route::get('/orders', [OrderController::class, 'list'])->name('orderList');
+Route::get('/orders/create', [OrderController::class, 'create'])->name('orderCreate');
+Route::post('/orders/create', [OrderController::class, 'createPost'])->name('orderCreatePost');
