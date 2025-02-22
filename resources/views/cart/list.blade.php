@@ -61,9 +61,15 @@ use App\Models\Product;
             <form method="POST" action="{{ route('cartDeleteAll') }}">
                 @csrf
                 @method('DELETE')
-                <button type="submit">Borrar todo</button>
+                <button type="submit">Vaciar carrito</button>
             </form>
-            <a href="">Confirmar Pedido</a>
+            @auth
+            <a href="">Confirmar pedido</a>
+            @endauth
+            @guest
+            <a href="">Inicia sesión para confirmar pedido</a>
+            @endguest
+            
         @empty
             No hay ningún producto en el carrito
         @endforelse

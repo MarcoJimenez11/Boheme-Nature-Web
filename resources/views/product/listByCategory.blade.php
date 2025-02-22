@@ -14,8 +14,6 @@
 
     <h2>Lista de productos</h2>
 
-    <a href="{{ route('productCreate') }}">Crear Producto</a>
-
     <table>
         <thead>
             <th>Producto</th>

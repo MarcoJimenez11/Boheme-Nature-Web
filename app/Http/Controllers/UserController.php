@@ -90,4 +90,43 @@ class UserController extends Controller
             ]);
         }
     }
+
+    public function edit(User $user)
+    {
+        return view('user.edit')
+        ->with('categories', Category::orderBy('name')->get())
+        ->with('user', $user);
+    }
+
+    public function editPut(User $user)
+    {
+        if($user->is_admin){
+            $data = request()->validate([
+                'userName' => 'required',
+                'userEmail' => ['required','email'],
+            ], [
+                'userName.required' => 'El campo nombre es obligatorio',
+                'userEmail.required' => 'El campo email es obligatorio',
+                'userEmail.email' => 'El email no tiene un formato válido',
+            ]);
+
+            $user->update([
+                'name' => $data['userName'],
+                'email' => $data['userEmail'],
+            ]);
+        }else{
+            $data = request()->validate([
+                'userName' => 'required',
+            ], [
+                'userName.required' => 'El campo nombre es obligatorio',
+            ]);
+
+            $user->update([
+                'name' => $data['userName'],
+            ]);
+        }
+        
+
+        return redirect()->route('home');
+    }
 }

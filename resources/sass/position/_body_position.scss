@@ -5,6 +5,16 @@ html {
     body {
         margin: 0px;
         padding: 0px;
+
+        main {
+            display: flex;
+            flex-direction: column;
+        }
+
+        // #categories {
+        //     display: flex;
+        //     flex-direction: column;
+        // }
+
     }
 }
-

@@ -14,6 +14,8 @@ Route::post('/register', [UserController::class, 'registerPost'])->name('registe
 Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::post('/login', [UserController::class, 'loginPost'])->name('loginPost');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+Route::get('/user/edit/{user}', [UserController::class, 'edit'])->name('userEdit');
+Route::put('/user/edit/{user}', [UserController::class, 'editPut'])->name('userEditPut');
 
 Route::get('/categories', [CategoryController::class, 'list'])->name('categoryList');
 Route::get('/categories/create', [CategoryController::class, 'create'])->name('categoryCreate');

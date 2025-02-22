@@ -4,16 +4,21 @@
 
 header {
     display: flex;
-    justify-content: space-around;
-
-    h1 {
-        
-    }
-
-    nav {
-
-        a{
-            margin-right: 10px;
+    flex-direction: column;
+    
+    section {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            a {
+                margin-right: 10px;
+            }
         }
     }
+
+
 }

@@ -34,13 +34,7 @@
                     <td>{{ $order->status }}</td>
                     <td>{{ $order->created_at }}</td>
 
-                    <td><a href="{{ route('home', $order) }}">Editar</a></td>
-                    <td>
-                        <form method="POST" action="{{ route('home', $order) }}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Eliminar</button>
-                        </form>
+                    <td><a href="{{ route('home', $order) }}">Ver detalles</a>
                     </td>
                 </tr>
             @endforeach

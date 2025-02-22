@@ -7,11 +7,19 @@ header {
     background-color: variables.$color-principal;
     color: variables.$color-neutro;
 
+    section{
+        h1{
+            a {
+                color: variables.$color-neutro;
+                text-decoration: none;
+            }
+        }
+    }
     nav {
 
         a {
             color: variables.$color-neutro;
-    
+            text-decoration: none;
             &:hover {
                 background-color: functions.apply-filter(variables.$color-principal, 30%);
             }

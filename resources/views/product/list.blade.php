@@ -18,7 +18,12 @@ use App\Models\Category;
 
     <h2>Lista de productos</h2>
 
-    <a href="{{ route('productCreate') }}">Crear Producto</a>
+    @auth
+        @if (Auth::user()->is_admin)
+            <a href="{{ route('productCreate') }}">Crear Producto</a>
+        @endif
+    @endauth
+
 
     <table>
         <thead>
