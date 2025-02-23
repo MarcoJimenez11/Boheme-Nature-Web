@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderLineController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -41,3 +42,5 @@ Route::delete('/cart/delete/', [CartController::class, 'deleteAll'])->name('cart
 Route::get('/orders', [OrderController::class, 'list'])->name('orderList');
 Route::get('/orders/create', [OrderController::class, 'create'])->name('orderCreate');
 Route::post('/orders/create', [OrderController::class, 'createPost'])->name('orderCreatePost');
+
+Route::get('/order/lines/{order}', [OrderLineController::class, 'list'])->name('orderLineList');

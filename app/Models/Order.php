@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\OrderLine;
 
 class Order extends Model
 {
@@ -23,4 +24,13 @@ class Order extends Model
         'status',
         'created_at'
     ];
+
+    public function getTotalCost(){
+        $orderLines = OrderLine::where('order_id', '=', $this->id)->orderBy('created_at')->get();
+        $totalCost = 0;
+        foreach ($orderLines as $line) {
+            $totalCost += Product::find($line->product_id)->price * $line->amount;
+        }
+        return $totalCost;
+    }
 }

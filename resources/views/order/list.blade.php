@@ -30,11 +30,11 @@
                     <td>{{ $order->province }}</td>
                     <td>{{ $order->locality }}</td>
                     <td>{{ $order->direction }}</td>
-                    <td>{{ $order->cost }}</td>
+                    <td>{{ $order->getTotalCost() }} €</td>
                     <td>{{ $order->status }}</td>
                     <td>{{ $order->created_at }}</td>
 
-                    <td><a href="{{ route('home', $order) }}">Ver detalles</a>
+                    <td><a href="{{ route('orderLineList', $order) }}">Ver detalles</a>
                     </td>
                 </tr>
             @endforeach

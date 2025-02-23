@@ -16,7 +16,14 @@
             <nav>
                 <button id="toggleCategories">Categorías</button>
 
-                <a href="{{ route('cartList') }}">Ver carrito</a>
+                <a href="{{ route('cartList') }}">Ver carrito
+                    @if(session()->has('cart'))
+                    <p>( {{ count(session('cart'))}} )</p>
+                    @else
+                    <p>(0)</p>
+                    @endif
+                    
+                </a>
 
                 <!-- Esta etiqueta Blade equivale a un condicional en caso de estar autenticado el usuario (Auth) -->
                 @auth

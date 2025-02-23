@@ -25,10 +25,8 @@
 
         @auth
             @if (Auth::user()->is_admin)
-                <section>
-                    <label for="userEmail">Email</label>
-                    <input type="email" name="userEmail" value="{{ $user->email }}">
-                </section>
+                <label for="userEmail">Email</label>
+                <input type="email" name="userEmail" value="{{ $user->email }}">
             @endif
         @endauth
 
