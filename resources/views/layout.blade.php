@@ -41,6 +41,11 @@
         </section>
         @auth
             @if (Auth::user()->is_admin)
+            @if(Auth::viaRemember())
+            recordar
+            @else
+            no recuerdo naaaa
+            @endif
                 <section>
                     <h2>Menú de Administrador</h2>
                     <nav>

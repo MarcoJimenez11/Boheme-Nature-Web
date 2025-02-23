@@ -24,7 +24,7 @@
         <input type="password" name="userPassword">
 
         <label for="rememberSession">Mantener sesión iniciada</label>
-        <input type="checkbox" name="rememberSession">
+        <input type="checkbox" name="rememberSession" value="false">
 
         <button type="submit">Iniciar Sesión</button>
     </form>

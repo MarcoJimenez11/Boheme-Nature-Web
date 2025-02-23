@@ -33,10 +33,12 @@ class UserController extends Controller
             'userPassword.required' => 'El campo contraseña es obligatorio',
         ]);
 
+        $remember = request()->has('rememberSession');
+
         if (Auth::attempt([
             "email" => $data['userEmail'],
             "password" => $data['userPassword']
-        ], request()->has('rememberSession'))) {
+        ], $remember)) {
             request()->session()->regenerate();
             
             return redirect()->route('home');
