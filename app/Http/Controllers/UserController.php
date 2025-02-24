@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Throwable;
+use Illuminate\Auth\Events\Registered;
 
 class UserController extends Controller
 {
@@ -80,13 +81,13 @@ class UserController extends Controller
         ]);
 
         if ($data['userPassword'] == $data['userRepeatPassword']) {
-            User::create([
+            $user = User::create([
                 'name' => $data['userName'],
                 'email' => $data['userEmail'],
                 'password' => bcrypt($data['userPassword'])
             ]);
-
-            return redirect()->route('login');
+            event(new Registered($user));
+            return view('auth.verify-email');
         } else {
             return back()->withErrors([
                 'userRepeatPassword' => 'El campo repetir contraseña no coincide',
