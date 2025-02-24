@@ -1,7 +1,6 @@
-@extends('layout')
+@extends('layoutAdmin')
 
 @section('content')
-
     @if ($errors->any())
         <section class="errorList">
             <h4>Corrige los siguientes errores:</h4>

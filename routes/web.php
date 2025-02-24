@@ -23,6 +23,8 @@ Route::put('/user/editName/{user}', [UserController::class, 'editNamePut'])->nam
 Route::put('/user/editEmail/{user}', [UserController::class, 'editEmailPut'])->name('userEditEmailPut');
 Route::put('/user/editPassword/{user}', [UserController::class, 'editPasswordPut'])->name('userEditPasswordPut');
 Route::put('/user/editIsAdmin/{user}', [UserController::class, 'editIsAdminPut'])->name('userEditIsAdminPut');
+Route::get('/user/list', [UserController::class, 'list'])->name('userList');
+Route::delete('/user/delete/{user}', [UserController::class, 'delete'])->name('userDelete');
 
 /*
     Rutas de Categorías

@@ -64,7 +64,17 @@
         </section>
 
         <section id="content">
-            @yield('content')
+            @auth
+                @if (Auth::user()->is_admin)
+                    @yield('content')
+                @else
+                    <h2>Se necesitan permisos de Administrador para acceder</h2>
+                @endif
+            @endauth
+
+            @guest
+                <h2>Se necesitan permisos de Administrador para acceder</h2>
+            @endguest
         </section>
 
 

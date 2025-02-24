@@ -1,7 +1,6 @@
 @extends('layoutAdmin')
 
 @section('content')
-
     @if ($errors->any())
         <section class="errorList">
             <ul>
@@ -12,22 +11,28 @@
         </section>
     @endif
 
-    <h2>Lista de categorías</h2>
+    <h2>Lista de usuarios</h2>
 
-    <a href="{{ route('categoryCreate') }}">Crear Categoría</a>
+    <a href="{{ route('register') }}">Crear usuario</a>
+
 
     <table>
         <thead>
-            <th>Categoría</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Fecha de registro</th>
             <th>Acciones</th>
         </thead>
         <tbody>
-            @foreach ($categories as $category)
+            @foreach ($users as $user)
                 <tr>
-                    <td>{{ $category->name }} </td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->created_at }}</td>
+
                     <td>
-                        <a href="{{ route('categoryEdit', $category) }}">Editar</a>
-                        <form method="POST" action="{{ route('categoryDelete', $category) }}">
+                        <a href="{{ route('userEdit', $user) }}">Editar</a>
+                        <form method="POST" action="{{ route('userDelete', $user) }}">
                             @csrf
                             @method('DELETE')
                             <button type="submit">Eliminar</button>
@@ -39,5 +44,6 @@
         </tbody>
 
     </table>
+
 
 @endsection

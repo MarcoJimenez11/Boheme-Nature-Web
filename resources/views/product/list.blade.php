@@ -2,9 +2,7 @@
 use App\Models\Category;
 ?>
 
-@extends('layout')
-
-@section('content')
+@extends('layoutAdmin')
 
     @if ($errors->any())
         <section class="errorList">
@@ -18,11 +16,7 @@ use App\Models\Category;
 
     <h2>Lista de productos</h2>
 
-    @auth
-        @if (Auth::user()->is_admin)
-            <a href="{{ route('productCreate') }}">Crear Producto</a>
-        @endif
-    @endauth
+    <a href="{{ route('productCreate') }}">Crear Producto</a>
 
 
     <table>
@@ -59,5 +53,4 @@ use App\Models\Category;
         </tbody>
 
     </table>
-
 @endsection

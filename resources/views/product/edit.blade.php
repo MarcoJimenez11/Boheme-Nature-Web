@@ -1,7 +1,6 @@
-@extends('layout')
+@extends('layoutAdmin')
 
 @section('content')
-
     @if ($errors->any())
         <section class="errorList">
             <h4>Corrige los siguientes errores:</h4>
@@ -14,7 +13,7 @@
     @endif
 
     <h2>Editar Producto</h2>
-    <form method="POST" action="{{ route('productEditPut',$product) }}">
+    <form method="POST" action="{{ route('productEditPut', $product) }}">
         <!-- csrf es un token para validar el POST, evitando POST maliciosos de terceros -->
         @csrf
         <!-- method('PUT) especifica que el formulario enviará una petición PUT en vez de POST -->

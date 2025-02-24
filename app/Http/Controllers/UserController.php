@@ -8,6 +8,7 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Throwable;
 
 class UserController extends Controller
 {
@@ -171,5 +172,24 @@ class UserController extends Controller
         ]);
 
         return redirect()->route('home');
+    }
+
+    public function list()
+    {
+        return view('user.list')
+        ->with("users", User::orderBy('created_at')->get())
+        ->with("categories", Category::orderBy('name')->get());
+    }
+
+    public function delete(User $user){
+        try{
+            $user->delete();
+        }catch(Throwable $e){
+            return back()->withErrors([
+                'delete' => 'No se ha podido borrar el usuario porque tiene pedidos asociados',
+            ]);
+        }
+        
+        return redirect()->route('userList');
     }
 }
