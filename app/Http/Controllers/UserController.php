@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -40,7 +41,7 @@ class UserController extends Controller
             "password" => $data['userPassword']
         ], $remember)) {
             request()->session()->regenerate();
-            
+
             return redirect()->route('home');
         } else {
             return back()->withErrors([
@@ -95,38 +96,79 @@ class UserController extends Controller
     public function edit(User $user)
     {
         return view('user.edit')
-        ->with('categories', Category::orderBy('name')->get())
-        ->with('user', $user);
+            ->with('categories', Category::orderBy('name')->get())
+            ->with('user', $user);
     }
 
-    public function editPut(User $user)
+    public function editNamePut(User $user)
     {
-        if($user->is_admin){
-            $data = request()->validate([
-                'userName' => 'required',
-                'userEmail' => ['required','email'],
-            ], [
-                'userName.required' => 'El campo nombre es obligatorio',
-                'userEmail.required' => 'El campo email es obligatorio',
-                'userEmail.email' => 'El email no tiene un formato válido',
-            ]);
+        $data = request()->validate([
+            'userName' => 'required',
+        ], [
+            'userName.required' => 'El campo nombre es obligatorio',
+        ]);
 
-            $user->update([
-                'name' => $data['userName'],
-                'email' => $data['userEmail'],
-            ]);
-        }else{
-            $data = request()->validate([
-                'userName' => 'required',
-            ], [
-                'userName.required' => 'El campo nombre es obligatorio',
-            ]);
+        $user->update([
+            'name' => $data['userName'],
+        ]);
 
-            $user->update([
-                'name' => $data['userName'],
+        return redirect()->route('home');
+    }
+
+    public function editEmailPut(User $user)
+    {
+        $data = request()->validate([
+            'userEmail' => ['required', 'email', 'unique:users,email'],
+        ], [
+            'userEmail.required' => 'El campo email es obligatorio',
+            'userEmail.email' => 'El email no tiene un formato válido',
+            'userEmail.unique' => 'El email ya está registrado',
+        ]);
+
+        $user->update([
+            'email' => $data['userEmail'],
+        ]);
+
+        return redirect()->route('home');
+    }
+
+    public function editPasswordPut(User $user)
+    {
+        $data = request()->validate([
+            'userOldPassword' => 'required',
+            'userNewPassword' => 'required',
+            'userNewPasswordRepeat' => 'required',
+        ], [
+            'userOldPassword.required' => 'El campo antigua contraseña es obligatorio',
+            'userNewPassword.required' => 'El campo nueva contraseña es obligatorio',
+            'userNewPasswordRepeat.required' => 'El campo repetir nueva contraseña es obligatorio',
+        ]);
+
+
+        if ($data['userNewPassword'] == $data['userNewPasswordRepeat']) {
+            if (Hash::check($data['userOldPassword'], $user->password)) {
+                $user->update([
+                    'password' => bcrypt($data['userNewPassword']),
+                ]);
+
+                return redirect()->route('home');
+            } else {
+                return back()->withErrors([
+                    'userOldPassword' => 'El campo contraseña antigua no coincide con la contraseña actual',
+                ]);
+            }
+        } else {
+            return back()->withErrors([
+                'userNewPasswordRepeat' => 'El campo repetir contraseña no coincide',
             ]);
         }
-        
+    }
+
+    public function editIsAdminPut(User $user)
+    {
+        $user->update([
+            'is_admin' => request()->has('userIsAdmin'),
+        ]);
 
         return redirect()->route('home');
     }

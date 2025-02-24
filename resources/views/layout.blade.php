@@ -41,15 +41,10 @@
         </section>
         @auth
             @if (Auth::user()->is_admin)
-            @if(Auth::viaRemember())
-            recordar
-            @else
-            no recuerdo naaaa
-            @endif
                 <section>
                     <h2>Menú de Administrador</h2>
                     <nav>
-                        <a href="{{ route('register') }}">Registro</a>
+                        <a href="{{ route('register') }}">Crear nuevo usuario</a>
                         <a href="{{ route('categoryList') }}">Gestionar Categorías</a>
                         <a href="{{ route('productList') }}">Gestionar Productos</a>
                     </nav>

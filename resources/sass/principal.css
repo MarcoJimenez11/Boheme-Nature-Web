@@ -158,10 +158,8 @@ footer {
   padding-top: 20px;
   padding-bottom: 20px;
   padding-right: 20px;
-  margin: auto;
-  position: fixed;
-  bottom: 0px;
-  width: 100%;
+  margin-top: 100px;
+  margin-bottom: 0;
 }
 footer a, footer i {
   margin-right: 20px;
