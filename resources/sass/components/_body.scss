@@ -6,7 +6,8 @@ body {
 
     .errorList {
         background-color: variables.$color-error;
-        color: variables.$color-negro;
+        color: variables.$color-blanco;
+        border-radius: 6px;
     }
 
     h2 {
@@ -75,5 +76,28 @@ body {
         border-color: variables.$color-gris-claro;
     }
 
+    .pagination {
+        text-decoration: none;
+
+        nav {
+            ul {
+
+                li {
+                    span {
+                        font-size: 30px;
+                        color: variables.$color-gris;
+                        border-color: variables.$color-gris-claro;
+                    }
+
+                    a {
+                        font-size: 20px;
+                        color: variables.$color-resalto;
+                        font-weight: bold;
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
 
 }

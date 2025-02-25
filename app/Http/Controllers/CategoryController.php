@@ -15,7 +15,7 @@ class CategoryController extends Controller
 
     public function list()
     {
-        return view('category.list')->with("categories", Category::orderBy('name')->get());
+        return view('category.list')->with("categories", Category::orderBy('name')->paginate(perPage: 20));
     }
 
     public function create()

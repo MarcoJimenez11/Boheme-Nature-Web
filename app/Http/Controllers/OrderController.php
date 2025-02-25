@@ -14,7 +14,7 @@ class OrderController extends Controller
     public function list()
     {
         return view('order.list')
-        ->with('orders', Order::where('user_id', Auth::user()->id)->orderBy('created_at')->get())
+        ->with('orders', Order::where('user_id', Auth::user()->id)->orderBy('created_at')->paginate(20))
         ->with("categories", Category::orderBy('name')->get());
     }
 

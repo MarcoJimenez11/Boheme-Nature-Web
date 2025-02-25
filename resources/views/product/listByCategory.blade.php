@@ -32,4 +32,10 @@
             </section>
         @endforeach
     </section>
+
+    {{-- Esta sección añade la paginación. El parámetro de links, por alguna razón, me permite dar estilos propios(sin él no funcionan) --}}
+    <section class="pagination">
+        {{ $products->links('pagination::bootstrap-4') }}
+    </section>
+
 @endsection

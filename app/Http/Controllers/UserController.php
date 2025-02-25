@@ -17,7 +17,7 @@ class UserController extends Controller
     public function home()
     {
         return view('product.listByCategory')
-        ->with("products", Product::all())
+        ->with("products", Product::orderBy('name')->paginate(20))
         ->with("categories", Category::orderBy('name')->get());
     }
 
@@ -179,7 +179,7 @@ class UserController extends Controller
     public function list()
     {
         return view('user.list')
-        ->with("users", User::orderBy('created_at')->get())
+        ->with("users", User::orderBy('created_at')->paginate(20))
         ->with("categories", Category::orderBy('name')->get());
     }
 

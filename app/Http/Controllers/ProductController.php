@@ -14,7 +14,7 @@ class ProductController extends Controller
     public function list()
     {
         return view('product.list')
-        ->with("products", Product::orderBy('name')->get())
+        ->with("products", Product::orderBy('name')->paginate(20))
         ->with("categories", Category::orderBy('name')->get());
     }
 
@@ -108,7 +108,7 @@ class ProductController extends Controller
     public function listByCategory(Category $category){
         return view('product.listByCategory')
         ->with("category", $category)
-        ->with("products", Product::where('category_id','=', $category->id)->orderBy('name')->get())
+        ->with("products", Product::where('category_id','=', $category->id)->orderBy('name')->paginate(20))
         ->with("categories", Category::orderBy('name')->get());
     }
 }

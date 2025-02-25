@@ -65,7 +65,8 @@ body {
 }
 body .errorList {
   background-color: #d11f1f;
-  color: #171717;
+  color: #f1f9ff;
+  border-radius: 6px;
 }
 body h2 {
   color: #494949;
@@ -113,6 +114,20 @@ body th,
 body td {
   border: 1px solid;
   border-color: #cbcbcb;
+}
+body .pagination {
+  text-decoration: none;
+}
+body .pagination nav ul li span {
+  font-size: 30px;
+  color: #494949;
+  border-color: #cbcbcb;
+}
+body .pagination nav ul li a {
+  font-size: 20px;
+  color: #149E6E;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 footer {
@@ -212,6 +227,12 @@ html body main {
   display: flex;
   justify-content: center;
 }
+html body main .errorList {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
 html body main button {
   margin: 5px;
 }
@@ -271,6 +292,15 @@ html body .product-list .product-item section {
 }
 html body .product-list .product-item a {
   padding-bottom: 5px;
+}
+html body .pagination {
+  display: flex;
+  justify-content: space-around;
+}
+html body .pagination nav ul li {
+  display: flex;
+  justify-content: space-around;
+  margin: 10px;
 }
 
 footer {

@@ -7,6 +7,15 @@ html {
         padding: 0px;
 
         main {
+
+            .errorList {
+                padding-left: 10px;
+                padding-right: 10px;
+                padding-top: 4px;
+                padding-bottom: 4px;
+            }
+
+            
             display: flex;
             justify-content: center;
 
@@ -83,9 +92,25 @@ html {
                     align-items: center;
                     width: 100%;
                 }
-                
+
                 a {
                     padding-bottom: 5px;
+                }
+            }
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: space-around;
+
+            nav {
+                ul {
+
+                    li {
+                        display: flex;
+                        justify-content: space-around;
+                        margin: 10px;
+                    }
                 }
             }
         }

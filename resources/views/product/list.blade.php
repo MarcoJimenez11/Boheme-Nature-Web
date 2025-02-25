@@ -36,7 +36,7 @@ use App\Models\Category;
                     <td>{{ Category::find($product->category_id)->name }}</td>
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->description }}</td>
-                    <td>{{ $product->price }}</td>
+                    <td>{{ $product->price }} €</td>
                     <td>{{ $product->stock }}</td>
                     <td>{{ $product->image }}</td>
 
@@ -50,8 +50,12 @@ use App\Models\Category;
                     </td>
                 </tr>
             @endforeach
-
         </tbody>
-
     </table>
+
+    {{-- Esta sección añade la paginación. El parámetro de links, por alguna razón, me permite dar estilos propios(sin él no funcionan) --}}
+    <section class="pagination">
+        {{ $products->links('pagination::bootstrap-4') }}
+    </section>
+
 @endsection

@@ -38,9 +38,12 @@
                     </td>
                 </tr>
             @endforeach
-
         </tbody>
-
     </table>
+
+    {{-- Esta sección añade la paginación. El parámetro de links, por alguna razón, me permite dar estilos propios(sin él no funcionan) --}}
+    <section class="pagination">
+        {{ $orders->links('pagination::bootstrap-4') }}
+    </section>
 
 @endsection

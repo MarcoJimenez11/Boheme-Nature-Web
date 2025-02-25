@@ -58,16 +58,23 @@ use App\Models\Product;
                 @empty
                     No hay ningún producto en el carrito
                 @endforelse
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><form method="POST" action="{{ route('cartDeleteAll') }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Vaciar carrito</button>
+                    </form></td>
+                </tr>
             </tbody>
 
         </table>
-        <form method="POST" action="{{ route('cartDeleteAll') }}">
-            @csrf
-            @method('DELETE')
-            <button type="submit">Vaciar carrito</button>
-        </form>
+        
         @auth
-            <a href="{{ route('orderCreate') }}">Confirmar pedido</a>
+            <button><a href="{{ route('orderCreate') }}">Confirmar pedido</a></button>
         @endauth
         @guest
             <a href="{{ route('login') }}">Inicia sesión para confirmar pedido</a>
