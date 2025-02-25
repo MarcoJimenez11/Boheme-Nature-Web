@@ -87,8 +87,16 @@ class UserController extends Controller
                 'email' => $data['userEmail'],
                 'password' => bcrypt($data['userPassword'])
             ]);
+
+            //Este evento sirve para notificar al usuario que revise su correo para verificar su cuenta
             event(new Registered($user));
-            return view('auth.verify-email');
+
+            Auth::attempt([
+                "email" => $data['userEmail'],
+                "password" => $data['userPassword']
+            ]);
+
+            return redirect()->route('verification.notice');
         } else {
             return back()->withErrors([
                 'userRepeatPassword' => 'El campo repetir contraseña no coincide',

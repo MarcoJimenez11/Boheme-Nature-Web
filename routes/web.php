@@ -6,9 +6,11 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderLineController;
+use App\Http\Controllers\EmailVerificationController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+
 
 Route::get('/', [UserController::class, 'home'])->name('home');
 
@@ -32,24 +34,13 @@ Route::delete('/user/delete/{user}', [UserController::class, 'delete'])->name('u
     Rutas de Confirmación de Registro por Email
 */
 //Ruta que indica al usuario que revise su correo para verificar su cuenta
-Route::get('/email/verify', function () {
-    return view('auth.verify-email');
-})->middleware('auth')->name('verification.notice');
+Route::get('/email/verify', [EmailVerificationController::class, 'notice'])->middleware('auth')->name('verification.notice');
 
 //Ruta a la que irá dirigido el enlace que se envía al correo del usuario
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
-
-    return redirect('/home');
-})->middleware(['auth', 'signed'])->name('verification.verify');
-
+Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])->middleware(['auth', 'signed'])->name('verification.verify');
 
 //Ruta para reenviar el correo de verificación
-Route::post('/email/verification-notification', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
-
-    return back()->with('message', '¡Enlace de verificación enviado!');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+Route::post('/email/verification-notification', [EmailVerificationController::class, 'send'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 /*
     Rutas de Categorías
@@ -84,11 +75,11 @@ Route::delete('/cart/delete/', [CartController::class, 'deleteAll'])->name('cart
 /*
     Rutas de Pedidos
 */
-Route::get('/orders', [OrderController::class, 'list'])->name('orderList');
-Route::get('/orders/create', [OrderController::class, 'create'])->name('orderCreate');
-Route::post('/orders/create', [OrderController::class, 'createPost'])->name('orderCreatePost');
+Route::get('/orders', [OrderController::class, 'list'])->name('orderList')->middleware(['auth', 'verified']);
+Route::get('/orders/create', [OrderController::class, 'create'])->name('orderCreate')->middleware(['auth', 'verified']);
+Route::post('/orders/create', [OrderController::class, 'createPost'])->name('orderCreatePost')->middleware(['auth', 'verified']);
 
 /*
     Rutas de Lineas de Pedido
 */
-Route::get('/order/lines/{order}', [OrderLineController::class, 'list'])->name('orderLineList');
+Route::get('/order/lines/{order}', [OrderLineController::class, 'list'])->name('orderLineList')->middleware(['auth', 'verified']);

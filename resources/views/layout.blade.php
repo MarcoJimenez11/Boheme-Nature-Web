@@ -27,9 +27,14 @@
 
                 <!-- Esta etiqueta Blade equivale a un condicional en caso de estar autenticado el usuario (Auth) -->
                 @auth
-                    <a href="{{ route('userEdit', Auth::user()) }}">Bienvenid@ {{ Auth::user()->name }} </a>
-                    <a href="{{ route('orderList') }}">Mis Pedidos</a>
-                    <a href="{{ route('logout') }}">Cerrar Sesión</a>
+                    @if (Auth::user()->hasverifiedemail())
+                        <a href="{{ route('userEdit', Auth::user()) }}">Bienvenid@ {{ Auth::user()->name }} </a>
+                        <a href="{{ route('orderList') }}">Mis Pedidos</a>
+                        <a href="{{ route('logout') }}">Cerrar Sesión</a>
+                    @else
+                        <a href="{{ route('verification.notice') }}">Pendiente de verificación de correo</a>
+                    @endif
+
                 @endauth
 
                 @guest

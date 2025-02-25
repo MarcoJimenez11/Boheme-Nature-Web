@@ -77,7 +77,7 @@ use App\Models\Product;
             <button><a href="{{ route('orderCreate') }}">Confirmar pedido</a></button>
         @endauth
         @guest
-            <a href="{{ route('login') }}">Inicia sesión para confirmar pedido</a>
+            <button><a href="{{ route('login') }}">Inicia sesión para confirmar pedido</a></button>
         @endguest
     @else
         No hay ningún producto en el carrito

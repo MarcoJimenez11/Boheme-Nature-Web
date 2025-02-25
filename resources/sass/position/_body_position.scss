@@ -114,5 +114,10 @@ html {
                 }
             }
         }
+
+        #email-verification {
+            display: flex;
+            flex-direction: column;
+        }
     }
 }
