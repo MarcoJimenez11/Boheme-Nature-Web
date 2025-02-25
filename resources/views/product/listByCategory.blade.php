@@ -28,7 +28,11 @@
                     <h3 id="product-price">{{ $product->price }}€</h3>
                     <p>En stock: {{ $product->stock }}</p>
                 </section>
-                <button><a href="{{ route('cartAdd', $product) }}">Añadir al carrito</a></button>
+                @if ($product->stock > 0)
+                    <button><a href="{{ route('cartAdd', $product) }}">Añadir al carrito</a></button>
+                @else
+                    <p>Producto agotado</p>
+                @endif
             </section>
         @endforeach
     </section>

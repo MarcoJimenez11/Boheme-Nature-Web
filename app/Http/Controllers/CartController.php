@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Product;
 
 class CartController extends Controller
 {
@@ -46,10 +47,19 @@ class CartController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * Aumenta o disminuye la cantidad de items de una línea del carrito,
+     * comprobando que no sea ni menor a 1 ni mayor al stock del producto
+     * @param mixed $item
+     * @param mixed $add
+     * @return mixed|\Illuminate\Http\RedirectResponse
+     */
     public function changeAmountItem($item, $add)
     {
         $currentAmount = session("cart.$item.amount");
-        if ($currentAmount + $add > 0) {
+        $productStock = Product::where('id', '=',session("cart.$item.id"))->first()->stock;
+
+        if ($currentAmount + $add > 0 && $currentAmount + $add <= $productStock) {
             session()->put("cart.$item.amount", $currentAmount + $add);
         }
         return redirect()->back();

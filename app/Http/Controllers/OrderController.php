@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use App\Models\OrderLine;
 
@@ -29,7 +30,6 @@ class OrderController extends Controller
         }
         $user_id = Auth::user()->id;
         
-
         $data = request()->validate([
             'orderProvince' => ['required'],
             'orderLocality' => ['required'],
@@ -55,6 +55,8 @@ class OrderController extends Controller
                 'product_id' => $item['id'],
                 'amount' => $item['amount'],
             ]);
+
+            Product::where('id', '=', $item['id'])->decrement('stock', $item['amount']);
         }
         session()->forget('cart');
 
