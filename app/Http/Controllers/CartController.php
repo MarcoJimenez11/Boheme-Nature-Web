@@ -15,9 +15,28 @@ class CartController extends Controller
             ->with("cartItems", session('cart'));
     }
 
+    /**
+     * Añade un producto al carrito, comprobando si ya existe para no añadir duplicado, sino aumentar su cantidad en 1
+     * 
+     * @param mixed $product
+     * @return mixed|\Illuminate\Http\RedirectResponse
+     */
     public function addItem($product)
     {
-        session()->push('cart', ['id' => $product, 'amount' => 1]);
+        $cart = session('cart', []);
+        $itemFound = false;
+
+        foreach ($cart as $index => $item) {
+            if ($item['id'] == $product) {
+                $this->changeAmountItem($index, 1);
+                $itemFound = true;
+                break;
+            }
+        }
+
+        if (!$itemFound) {
+            session()->push('cart', ['id' => $product, 'amount' => 1]);
+        }
         return redirect()->back();
     }
 
