@@ -14,7 +14,7 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         Category::factory()->create([
-            'name' => 'Bebida'
+            'name' => 'Bebidas'
         ]);
 
         Category::factory()->create([
@@ -22,11 +22,11 @@ class CategorySeeder extends Seeder
         ]);
 
         Category::factory()->create([
-            'name' => 'Fruta'
+            'name' => 'Frutas'
         ]);
 
         Category::factory()->create([
-            'name' => 'Verdura'
+            'name' => 'Verduras'
         ]);
 
         Category::factory()->create([

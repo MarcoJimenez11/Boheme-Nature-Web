@@ -3,9 +3,5 @@
 @use '../global/mixins';
 
 button {
-    @include mixins.button(variables.$color-principal, variables.$color-neutro);
-}
-
-.buttonCTA {
-    @include mixins.button(variables.$color-resalto, variables.$color-neutro);
+    @include mixins.button(variables.$color-resalto, variables.$color-blanco);
 }

@@ -14,13 +14,13 @@
         <section>
             <h1><a href="{{ route('home') }}">Marcodona</a></h1>
             <nav>
-                <button id="toggleCategories">Categorías</button>
+                <a id="toggleCategories">Categorías</a>
 
                 <a href="{{ route('cartList') }}">Ver carrito
                     @if (session()->has('cart'))
-                        <p>( {{ count(session('cart')) }} )</p>
+                        ( {{ count(session('cart')) }} )
                     @else
-                        <p>(0)</p>
+                        (0)
                     @endif
 
                 </a>
@@ -55,7 +55,8 @@
     </header>
 
     <main>
-        <section id="categories" hidden>
+        <section id="categories" class="hide">
+            <h2>Categorías</h2>
             @forelse($categories as $category)
                 <a href="{{ route('productListByCategory', $category) }}">{{ $category->name }}</a>
             @empty
@@ -67,6 +68,7 @@
             @yield('content')
         </section>
 
+        <section></section>
 
     </main>
 

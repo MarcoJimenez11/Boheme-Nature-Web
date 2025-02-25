@@ -10,10 +10,11 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 
+Route::get('/', [UserController::class, 'home'])->name('home');
+
 /*
     Rutas de Usuarios
 */
-Route::get('/', [UserController::class, 'home'])->name('home');
 Route::get('/register', [UserController::class, 'register'])->name('register');
 Route::post('/register', [UserController::class, 'registerPost'])->name('registerPost');
 Route::get('/login', [UserController::class, 'login'])->name('login');

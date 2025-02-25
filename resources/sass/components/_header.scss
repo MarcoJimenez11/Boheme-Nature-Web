@@ -4,24 +4,28 @@
 
 
 header {
-    background-color: variables.$color-principal;
-    color: variables.$color-neutro;
-
+    background-color: variables.$color-blanco;
+    color: variables.$color-resalto;
     section{
         h1{
             a {
-                color: variables.$color-neutro;
+                color: variables.$color-resalto;
                 text-decoration: none;
             }
         }
+        border-bottom: 1px solid;
+        border-color: variables.$color-gris-claro;
     }
     nav {
 
         a {
-            color: variables.$color-neutro;
+            color: variables.$color-resalto;
             text-decoration: none;
+            font-weight: bold;
+
             &:hover {
-                background-color: functions.apply-filter(variables.$color-principal, 30%);
+                background-color: functions.apply-filter(variables.$color-blanco, 3%);
+                cursor: pointer;
             }
         }
     }

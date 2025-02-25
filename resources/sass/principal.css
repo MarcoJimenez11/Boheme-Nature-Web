@@ -15,64 +15,118 @@
 /*
     Estructura del banner para cambiar su organización según la resolución de la pantalla
 */
-/*
-    Este mixin solo existe para usar interpolación, no se usa en la página
-*/
-button {
-  background-color: #296db0;
-  color: #e9f6ff;
-  border-color: #171717;
-  border-radius: 8px;
+@font-face {
+  font-family: Franxurter-w11D9;
+  src: url("/fonts/Franxurter-w11D9.ttf");
 }
-button:hover {
-  background-color: #995e32;
-  cursor: pointer;
+h1 a {
+  font-family: Franxurter-w11D9;
 }
 
-.buttonCTA {
-  background-color: #b46e3b;
-  color: #e9f6ff;
-  border-color: #171717;
+button {
+  background-color: #149E6E;
+  color: #f1f9ff;
+  border-color: #149E6E;
   border-radius: 8px;
 }
-.buttonCTA:hover {
-  background-color: #995e32;
+button a {
+  text-decoration: none;
+  color: #f1f9ff;
+}
+button:hover {
+  background-color: #0e6f4d;
   cursor: pointer;
 }
 
 header {
-  background-color: #296db0;
-  color: #e9f6ff;
+  background-color: #f1f9ff;
+  color: #149E6E;
+}
+header section {
+  border-bottom: 1px solid;
+  border-color: #cbcbcb;
 }
 header section h1 a {
-  color: #e9f6ff;
+  color: #149E6E;
   text-decoration: none;
 }
 header nav a {
-  color: #e9f6ff;
+  color: #149E6E;
   text-decoration: none;
+  font-weight: bold;
 }
 header nav a:hover {
-  background-color: #1d4c7b;
+  background-color: #eaf2f7;
+  cursor: pointer;
 }
 
 body {
-  background-color: #e9f6ff;
+  background-color: #f1f9ff;
 }
 body .errorList {
   background-color: #d11f1f;
-  color: #e9f6ff;
+  color: #171717;
+}
+body h2 {
+  color: #494949;
+}
+body h3 {
+  color: #494949;
+}
+body #categories {
+  border-right: 1px solid;
+  border-color: #cbcbcb;
+  background-color: #f1f9ff;
+}
+body #categories a {
+  color: #149E6E;
+  font-weight: bold;
+  text-decoration: none;
+}
+body #categories a:hover {
+  background-color: #149E6E;
+  color: #f1f9ff;
+}
+body .product-list .product-item {
+  border: 1px solid;
+  border-color: #cbcbcb;
+}
+body .product-list .product-item p {
+  color: #cbcbcb;
+}
+body .product-list .product-item:hover {
+  size: 110%;
+  background-color: #e5edf2;
+  cursor: pointer;
+}
+body table thead {
+  color: #149E6E;
+}
+body table tbody {
+  color: #171717;
+}
+body table tbody tr:nth-child(odd) {
+  background-color: #e5edf2;
+}
+body table,
+body th,
+body td {
+  border: 1px solid;
+  border-color: #cbcbcb;
 }
 
 footer {
-  background-color: #296db0;
+  background-color: #f1f9ff;
+  border-top: 1px solid;
+  border-color: #cbcbcb;
 }
 footer a {
-  color: #e9f6ff;
+  color: #149E6E;
+  text-decoration: none;
 }
 footer i {
   cursor: pointer;
-  color: #e9f6ff;
+  color: #149E6E;
 }
 @media (min-width: 1640px) {
   footer i {
@@ -110,22 +164,40 @@ footer i {
   }
 }
 
+form input {
+  border: 1px solid;
+  border-radius: 10px;
+  border-color: #494949;
+  color: #171717;
+  height: 20px;
+}
+form select {
+  border-radius: 10px;
+  border-color: #cbcbcb;
+  color: #494949;
+  height: 20px;
+}
+form label {
+  color: #494949;
+}
+
 header {
   display: flex;
   flex-direction: column;
 }
 header section {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 header section nav {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
 }
 header section nav a {
-  margin-right: 10px;
+  padding: 10px;
+  margin-right: 20px;
 }
 
 html {
@@ -140,6 +212,31 @@ html body main {
   display: flex;
   justify-content: center;
 }
+html body main button {
+  margin: 5px;
+}
+html body main #categories.hide {
+  display: none;
+}
+html body main #categories {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 0;
+  margin-right: 20px;
+  height: 100vmax;
+}
+html body main #categories h2 {
+  padding: 10px;
+}
+html body main #categories a {
+  padding: 10px;
+}
+html body main #content-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
 html body main #content h2 {
   text-align: center;
 }
@@ -150,6 +247,30 @@ html body main #content form {
 }
 html body main #content form input {
   margin-bottom: 10px;
+}
+html body .product-list {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+}
+html body .product-list .product-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 30px;
+  width: 200px;
+}
+html body .product-list .product-item img {
+  max-width: 150px;
+}
+html body .product-list .product-item section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+html body .product-list .product-item a {
+  padding-bottom: 5px;
 }
 
 footer {
@@ -170,4 +291,7 @@ footer a, footer i {
   footer a, footer i {
     margin-right: 2px;
   }
+}
+form input {
+  padding: 1px 1px 1px 6px;
 }/*# sourceMappingURL=principal.css.map */

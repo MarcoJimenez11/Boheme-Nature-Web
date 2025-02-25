@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -15,9 +16,9 @@ class UserController extends Controller
 {
     public function home()
     {
-        return view('layout')
-            ->with("users", User::all())
-            ->with("categories", Category::orderBy('name')->get());
+        return view('product.listByCategory')
+        ->with("products", Product::all())
+        ->with("categories", Category::orderBy('name')->get());
     }
 
     public function login()

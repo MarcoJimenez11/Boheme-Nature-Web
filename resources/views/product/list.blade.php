@@ -4,6 +4,7 @@ use App\Models\Category;
 
 @extends('layoutAdmin')
 
+@section('content')
     @if ($errors->any())
         <section class="errorList">
             <ul>
@@ -16,7 +17,7 @@ use App\Models\Category;
 
     <h2>Lista de productos</h2>
 
-    <a href="{{ route('productCreate') }}">Crear Producto</a>
+    <button><a href="{{ route('productCreate') }}">Crear Producto</a></button>
 
 
     <table>
@@ -40,7 +41,7 @@ use App\Models\Category;
                     <td>{{ $product->image }}</td>
 
                     <td>
-                        <a href="{{ route('productEdit', $product) }}">Editar</a>
+                        <button><a href="{{ route('productEdit', $product) }}">Editar</a></button>
                         <form method="POST" action="{{ route('productDelete', $product) }}">
                             @csrf
                             @method('DELETE')

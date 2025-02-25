@@ -12,38 +12,24 @@
         </section>
     @endif
 
-    <h2>Lista de productos</h2>
+    @if (isset($category))
+        <h2>{{ $category->name }}</h2>
+    @else
+        <h2>Todos los productos</h2>
+    @endif
 
-    <table>
-        <thead>
-            <th>Producto</th>
-            <th>Descripción</th>
-            <th>Precio</th>
-            <th>Stock</th>
-            <th>Imagen</th>
-            <th>Acciones</th>
-        </thead>
-        <tbody>
-            @foreach ($products as $product)
-                <tr>
-                    <td>{{ $product->name }}</td>
-                    <td>{{ $product->description }}</td>
-                    <td>{{ $product->price }}</td>
-                    <td>{{ $product->stock }}</td>
-                    <td>{{ $product->image }}</td>
-
-                    <td>
-                        <a href="{{ route('cartAdd', $product) }}">Añadir al carrito</a>
-                        {{-- <form method="POST" action="{{ route('cartAdd', ['name' => $product->name, 'price' => $product->price, 'amount' => 1]) }}">
-                            @csrf
-                            <button type="submit">Añadir al carrito</button>
-                        </form> --}}
-                    </td>
-                </tr>
-            @endforeach
-
-        </tbody>
-
-    </table>
-
+    <section class="product-list">
+        @foreach ($products as $product)
+            <section class="product-item">
+                {{-- <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"> --}}
+                <img src="{{ asset('../resources/storage/placeholder.webp') }}" alt="{{ $product->name }}">
+                <h3 id="product-name">{{ $product->name }}</h3>
+                <section>
+                    <h3 id="product-price">{{ $product->price }}€</h3>
+                    <p>En stock: {{ $product->stock }}</p>
+                </section>
+                <button><a href="{{ route('cartAdd', $product) }}">Añadir al carrito</a></button>
+            </section>
+        @endforeach
+    </section>
 @endsection

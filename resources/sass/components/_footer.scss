@@ -2,15 +2,17 @@
 @use '../global/mixins';
 
 footer {
-    background-color: variables.$color-principal;
-
+    background-color: variables.$color-blanco;
+    border-top: 1px solid;
+    border-color: variables.$color-gris-claro;
     a {
-        color: variables.$color-neutro;
+        color: variables.$color-resalto;
+        text-decoration: none;
     }
 
     i {
         cursor: pointer;
         @include mixins.dinamic-text-size(2em);
-        color: variables.$color-neutro;
+        color: variables.$color-resalto;
     }
 }

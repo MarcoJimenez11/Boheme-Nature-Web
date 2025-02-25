@@ -7,15 +7,20 @@
 /*
     EStructura general para los botones, con color de texto y fondo indicados por parámetro
 */
-@mixin button($background-color: variables.$color-principal, $text-color: variables.$color-neutro2) {
+@mixin button($background-color: variables.$color-resalto, $text-color: variables.$color-blanco) {
     background-color: $background-color;
     color: $text-color;
-    border-color: variables.$color-neutro2;
+    border-color: $background-color;
 
     border-radius: 8px;
 
+    a {
+        text-decoration: none;
+        color: $text-color;
+    }
+
     &:hover {
-        background-color: functions.apply-filter(variables.$color-resalto, 15%);
+        background-color: functions.apply-filter(variables.$color-resalto, 30%);
         cursor: pointer;
     }
 }
@@ -118,14 +123,3 @@
         }
     }
 }
-
-
-/*
-    Este mixin solo existe para usar interpolación, no se usa en la página
-*/
-
-@mixin set-image($name) {
-    .image-#{$name} {
-      background-image: url("../../media/img/avif/#{$name}.avif");
-    }
-  }

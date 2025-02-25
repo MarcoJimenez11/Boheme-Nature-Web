@@ -107,6 +107,7 @@ class ProductController extends Controller
 
     public function listByCategory(Category $category){
         return view('product.listByCategory')
+        ->with("category", $category)
         ->with("products", Product::where('category_id','=', $category->id)->orderBy('name')->get())
         ->with("categories", Category::orderBy('name')->get());
     }

@@ -14,7 +14,7 @@
 
     <h2>Lista de categorías</h2>
 
-    <a href="{{ route('categoryCreate') }}">Crear Categoría</a>
+    <button><a href="{{ route('categoryCreate') }}">Crear Categoría</a></button>
 
     <table>
         <thead>
@@ -26,7 +26,7 @@
                 <tr>
                     <td>{{ $category->name }} </td>
                     <td>
-                        <a href="{{ route('categoryEdit', $category) }}">Editar</a>
+                        <button><a href="{{ route('categoryEdit', $category) }}">Editar</a></button>
                         <form method="POST" action="{{ route('categoryDelete', $category) }}">
                             @csrf
                             @method('DELETE')

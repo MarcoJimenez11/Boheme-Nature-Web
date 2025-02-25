@@ -34,7 +34,7 @@
                     <td>{{ $order->status }}</td>
                     <td>{{ $order->created_at }}</td>
 
-                    <td><a href="{{ route('orderLineList', $order) }}">Ver detalles</a>
+                    <td><button><a href="{{ route('orderLineList', $order) }}">Ver detalles</a></button>
                     </td>
                 </tr>
             @endforeach

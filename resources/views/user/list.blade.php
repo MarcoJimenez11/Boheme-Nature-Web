@@ -13,7 +13,7 @@
 
     <h2>Lista de usuarios</h2>
 
-    <a href="{{ route('register') }}">Crear usuario</a>
+    <button><a href="{{ route('register') }}">Crear usuario</a></button>
 
 
     <table>
@@ -31,7 +31,7 @@
                     <td>{{ $user->created_at }}</td>
 
                     <td>
-                        <a href="{{ route('userEdit', $user) }}">Editar</a>
+                        <button><a href="{{ route('userEdit', $user) }}">Editar</a></button>
                         <form method="POST" action="{{ route('userDelete', $user) }}">
                             @csrf
                             @method('DELETE')

@@ -1,1 +1,12 @@
 @use '../global/mixins';
+
+@font-face {
+    font-family: Franxurter-w11D9;
+    src: url("/fonts/Franxurter-w11D9.ttf");
+}
+
+h1 {
+    a {
+        font-family: Franxurter-w11D9;
+    }
+}
