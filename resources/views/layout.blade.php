@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marcodona</title>
-    <link href="{{ asset('../resources/sass/principal.css') }}" rel="stylesheet">
+    <link href="{{ asset('../resources/scss/principal.css') }}" rel="stylesheet">
     <script type="module" src={{ asset('../resources/js/categoriesMenu.js') }} defer></script>
 </head>
 
