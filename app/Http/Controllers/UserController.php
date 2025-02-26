@@ -16,9 +16,17 @@ class UserController extends Controller
 {
     public function home()
     {
+        //Comprueba la cookie de recordar usuario y loguea en caso de que exista
+        if (request()->cookie('rememberUser')) {
+            Auth::attempt([
+                'email' => request()->cookie('rememberUser'),
+                'password' => request()->cookie('rememberPassword'),
+            ]);
+        }
+
         return view('product.listByCategory')
-        ->with("products", Product::orderBy('name')->paginate(20))
-        ->with("categories", Category::orderBy('name')->get());
+            ->with("products", Product::orderBy('name')->paginate(20))
+            ->with("categories", Category::orderBy('name')->get());
     }
 
     public function login()
@@ -45,7 +53,21 @@ class UserController extends Controller
         ], $remember)) {
             request()->session()->regenerate();
 
-            return redirect()->route('home');
+            if ($remember) {
+                $cookies = [
+                    cookie('rememberUser', $data['userEmail'], 10080),
+                    cookie('rememberPassword', bcrypt($data['userPassword']), 10080)
+                ];
+                return redirect()->route('home')->withCookies($cookies);
+            } else {
+                request()->cookies->remove('rememberUser');
+                request()->cookies->remove('rememberPassword');
+                $cookiesForgotten = [
+                    cookie()->forget('rememberUser'),
+                    cookie()->forget('rememberPassword')
+                ];
+                return redirect()->route('home')->withCookies($cookiesForgotten);
+            }
         } else {
             return back()->withErrors([
                 'password' => 'La contraseña no es correcta',
@@ -56,7 +78,8 @@ class UserController extends Controller
     public function logout()
     {
         Auth::logout();
-
+        // request()->cookies->remove('rememberUser');
+        // request()->cookies->remove('rememberPassword');
         return redirect()->route('home');
     }
 
@@ -187,19 +210,20 @@ class UserController extends Controller
     public function list()
     {
         return view('user.list')
-        ->with("users", User::orderBy('created_at')->paginate(20))
-        ->with("categories", Category::orderBy('name')->get());
+            ->with("users", User::orderBy('created_at')->paginate(20))
+            ->with("categories", Category::orderBy('name')->get());
     }
 
-    public function delete(User $user){
-        try{
+    public function delete(User $user)
+    {
+        try {
             $user->delete();
-        }catch(Throwable $e){
+        } catch (Throwable $e) {
             return back()->withErrors([
                 'delete' => 'No se ha podido borrar el usuario porque tiene pedidos asociados',
             ]);
         }
-        
+
         return redirect()->route('userList');
     }
 }

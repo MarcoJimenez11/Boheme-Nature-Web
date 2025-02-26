@@ -60,6 +60,8 @@ class OrderController extends Controller
         }
         session()->forget('cart');
 
-        return $this->list();
+        //Envía email de confirmación de pedido al usuario
+        return redirect()->route('orderEmail.send',['userEmail' => Auth::user()->email, 'order' => $order]);
+
     }
 }

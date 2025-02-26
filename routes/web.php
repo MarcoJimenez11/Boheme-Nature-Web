@@ -42,6 +42,9 @@ Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 've
 //Ruta para reenviar el correo de verificación
 Route::post('/email/verification-notification', [EmailVerificationController::class, 'send'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
+Route::get('/orderEmail/{userEmail}/{order}', [EmailVerificationController::class, 'sendOrderEmail'])->name('orderEmail.send');
+
+
 /*
     Rutas de Categorías
 */
