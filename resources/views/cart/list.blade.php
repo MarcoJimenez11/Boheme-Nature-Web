@@ -34,8 +34,8 @@ use App\Models\Product;
                     <tr>
                         <td>{{ Product::find($item['id'])->name }}</td>
                         <td>{{ $item['amount'] }}</td>
-                        <td>{{ Product::find($item['id'])->price }}</td>
-                        <td>{{ Product::find($item['id'])->price * $item['amount'] }}</td>
+                        <td>{{ Product::find($item['id'])->price }} €</td>
+                        <td>{{ Product::find($item['id'])->price * $item['amount'] }} €</td>
 
                         <td>
                             <form method="POST" action="{{ route('changeAmountItem', ['item' => $key, 'amount' => -1]) }}">
