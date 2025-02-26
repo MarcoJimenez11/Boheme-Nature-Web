@@ -3,27 +3,27 @@
 
 ## Índice
 
- 1. Introducción
- 2. Base de datos
-    2.1. Users
-    2.2. Sessions
-    2.3. Categories
-    2.4. Orders
-    2.5. Products
-    2.6. Order_lines
-    2.7. Cache & Cache_locks
- 3. Estructura del proyecto
- 4. Funcionalidad
-    4.1. Usuarios
-    4.2. Categorías
-    4.3. Productos
-    4.4. Carrito
-    4.5. Pedidos
-    4.6. Línea de pedidos
-    4.7. Otros
- 5. Estilo
- 6. Javascript
- 7. Repositorio
+- 1. Introducción
+- 2. Base de datos
+   - 2.1. Users
+   - 2.2. Sessions
+   - 2.3. Categories
+   - 2.4. Orders
+   - 2.5. Products
+   - 2.6. Order_lines
+   - 2.7. Cache & Cache_locks
+- 3. Estructura del proyecto
+- 4. Funcionalidad
+   - 4.1. Usuarios
+   - 4.2. Categorías
+   - 4.3. Productos
+   - 4.4. Carrito
+   - 4.5. Pedidos
+   - 4.6. Línea de pedidos
+   - 4.7. Otros
+- 5. Estilo
+- 6. Javascript
+- 7. Repositorio
 
 
 ## 1. Introducción
