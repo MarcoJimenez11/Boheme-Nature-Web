@@ -10,13 +10,25 @@ use App\Models\Order;
 use Illuminate\Support\Facades\Mail;
 use App\Models\OrderLine;
 
+/**
+ * Controlador de envío de emails de verificación de usuario y confirmación de pedidos
+ */
 class EmailVerificationController extends Controller
 {
+    /**
+     * Vista de notificación de verificación de email
+     * @return \Illuminate\Contracts\View\View
+     */
     public function notice()
     {
         return view('auth.verify-email');
     }
 
+    /**
+     * Endpoint para verificar el email del usuario desde el botón del correo enviado
+     * @param \Illuminate\Foundation\Auth\EmailVerificationRequest $request
+     * @return mixed|\Illuminate\Http\RedirectResponse
+     */
     public function verify(EmailVerificationRequest $request)
     {
         $request->fulfill();
@@ -24,6 +36,11 @@ class EmailVerificationController extends Controller
         return redirect()->route('home');
     }
 
+    /**
+     * Envía otro email de verificación al usuario
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function send(Request $request)
     {
         $request->user()->sendEmailVerificationNotification();

@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\OrderLine;
 
+/**
+ * Modelo de Pedido
+ */
 class Order extends Model
 {
     /** @use HasFactory<\Database\Factories\OrderFactory> */
@@ -25,6 +28,10 @@ class Order extends Model
         'created_at'
     ];
 
+    /**
+     * Devuelve el coste total del pedido según sus líneas de pedido
+     * @return float|int
+     */
     public function getTotalCost(){
         $orderLines = OrderLine::where('order_id', '=', $this->id)->orderBy('created_at')->get();
         $totalCost = 0;

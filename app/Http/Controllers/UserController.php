@@ -12,8 +12,15 @@ use Illuminate\Support\Facades\Hash;
 use Throwable;
 use Illuminate\Auth\Events\Registered;
 
+/**
+ * Controlador de usuarios
+ */
 class UserController extends Controller
 {
+    /**
+     * Vista principal de la aplicación, muestra todos los productos de la tienda
+     * @return \Illuminate\Contracts\View\View
+     */
     public function home()
     {
         //Comprueba la cookie de recordar usuario y loguea en caso de que exista
@@ -29,11 +36,19 @@ class UserController extends Controller
             ->with("categories", Category::orderBy('name')->get());
     }
 
+    /**
+     * Vista de inicio de sesión
+     * @return \Illuminate\Contracts\View\View
+     */
     public function login()
     {
         return view('user.login')->with("categories", Category::orderBy('name')->get());
     }
 
+    /**
+     * Inicia sesión para el usuario indicado en el formulario según los datos de la petición POST
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function loginPost()
     {
         $data = request()->validate([
@@ -75,19 +90,30 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * Cierra sesión del usuario autenticado
+     * @return mixed|\Illuminate\Http\RedirectResponse
+     */
     public function logout()
     {
         Auth::logout();
-        // request()->cookies->remove('rememberUser');
-        // request()->cookies->remove('rememberPassword');
+        
         return redirect()->route('home');
     }
 
+    /**
+     * Vista de registro de usuario
+     * @return \Illuminate\Contracts\View\View
+     */
     public function register()
     {
         return view('user.register')->with("categories", Category::orderBy('name')->get());
     }
 
+    /**
+     * Crea un nuevo usuario a partir de los datos del formulario de la petición POST
+     * @return mixed|\Illuminate\Http\RedirectResponse
+     */
     public function registerPost()
     {
         $data = request()->validate([
@@ -127,6 +153,11 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * Vista de edición de usuario
+     * @param \App\Models\User $user
+     * @return \Illuminate\Contracts\View\View
+     */
     public function edit(User $user)
     {
         return view('user.edit')
@@ -134,6 +165,11 @@ class UserController extends Controller
             ->with('user', $user);
     }
 
+    /**
+     * Edita el nombre del usuario indicado en el formulario según los datos de la petición PUT
+     * @param \App\Models\User $user
+     * @return mixed|\Illuminate\Http\RedirectResponse
+     */
     public function editNamePut(User $user)
     {
         $data = request()->validate([
@@ -149,6 +185,11 @@ class UserController extends Controller
         return redirect()->route('home');
     }
 
+    /**
+     * Edita el email del usuario indicado en el formulario según los datos de la petición PUT
+     * @param \App\Models\User $user
+     * @return mixed|\Illuminate\Http\RedirectResponse
+     */
     public function editEmailPut(User $user)
     {
         $data = request()->validate([
@@ -166,6 +207,11 @@ class UserController extends Controller
         return redirect()->route('home');
     }
 
+    /**
+     * Edita la contraseña del usuario indicado en el formulario según los datos de la petición PUT
+     * @param \App\Models\User $user
+     * @return mixed|\Illuminate\Http\RedirectResponse
+     */
     public function editPasswordPut(User $user)
     {
         $data = request()->validate([
@@ -198,6 +244,11 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * Edita el rol del usuario indicado en el formulario según los datos de la petición PUT
+     * @param \App\Models\User $user
+     * @return mixed|\Illuminate\Http\RedirectResponse
+     */
     public function editIsAdminPut(User $user)
     {
         $user->update([
@@ -207,6 +258,10 @@ class UserController extends Controller
         return redirect()->route('home');
     }
 
+    /**
+     * Vista de lista de usuarios (vista de administrador)
+     * @return \Illuminate\Contracts\View\View
+     */
     public function list()
     {
         return view('user.list')
@@ -214,6 +269,11 @@ class UserController extends Controller
             ->with("categories", Category::orderBy('name')->get());
     }
 
+    /**
+     * Borra un usuario indicado
+     * @param \App\Models\User $user
+     * @return mixed|\Illuminate\Http\RedirectResponse
+     */
     public function delete(User $user)
     {
         try {

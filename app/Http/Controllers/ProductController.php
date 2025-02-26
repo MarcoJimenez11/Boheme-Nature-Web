@@ -9,8 +9,15 @@ use App\Models\Category;
 use Throwable;
 use Illuminate\Validation\Rule;
 
+/**
+ * Controlador de productos
+ */
 class ProductController extends Controller
 {
+    /**
+     * Vista con el listado de productos (vista de administrador)
+     * @return \Illuminate\Contracts\View\View
+     */
     public function list()
     {
         return view('product.list')
@@ -18,12 +25,20 @@ class ProductController extends Controller
         ->with("categories", Category::orderBy('name')->get());
     }
 
+    /**
+     * Vista de creación de producto
+     * @return \Illuminate\Contracts\View\View
+     */
     public function create()
     {
         return view('product.create')
         ->with("categories", Category::orderBy('name')->get());
     }
 
+    /**
+     * Crea un producto a partir del formulario de la petición POST
+     * @return mixed|\Illuminate\Http\RedirectResponse
+     */
     public function createPost()
     {
         $data = request()->validate([
@@ -55,6 +70,11 @@ class ProductController extends Controller
         return redirect()->route('productList');
     }
 
+    /**
+     * Vista de edición de producto
+     * @param \App\Models\Product $product
+     * @return \Illuminate\Contracts\View\View
+     */
     public function edit(Product $product)
     {
         return view('product.edit')
@@ -62,6 +82,11 @@ class ProductController extends Controller
         ->with("categories", Category::orderBy('name')->get());
     }
 
+    /**
+     * Edita un producto a partir del formulario de la petición PUT
+     * @param \App\Models\Product $product
+     * @return mixed|\Illuminate\Http\RedirectResponse
+     */
     public function editPut(Product $product)
     {
         $data = request()->validate([
@@ -93,6 +118,11 @@ class ProductController extends Controller
         return redirect()->route('productList');
     }
 
+    /**
+     * Borra un producto a partir de la petición DELETE
+     * @param \App\Models\Product $product
+     * @return mixed|\Illuminate\Http\RedirectResponse
+     */
     public function delete(Product $product){
         try{
             $product->delete();
@@ -105,6 +135,11 @@ class ProductController extends Controller
         return redirect()->route('productList');
     }
 
+    /**
+     * Vista de listado de productos por categoría (vista de usuario)
+     * @param \App\Models\Category $category
+     * @return \Illuminate\Contracts\View\View
+     */
     public function listByCategory(Category $category){
         return view('product.listByCategory')
         ->with("category", $category)

@@ -9,12 +9,15 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
+/**
+ * Modelo de email de confirmación de pedido
+ */
 class OrderEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
-     * Create a new message instance.
+     * Crea una nueva instancia de mensaje
      */
     public function __construct(private $order, private $orderLines)
     {
@@ -22,7 +25,7 @@ class OrderEmail extends Mailable
     }
 
     /**
-     * Get the message envelope.
+     * Devuelve el asunto del mensaje
      */
     public function envelope(): Envelope
     {
@@ -32,7 +35,7 @@ class OrderEmail extends Mailable
     }
 
     /**
-     * Get the message content definition.
+     * Devuelve el contenido del mensaje
      */
     public function content(): Content
     {
@@ -46,7 +49,7 @@ class OrderEmail extends Mailable
     }
 
     /**
-     * Get the attachments for the message.
+     * Devuelve los adjuntos del mensaje
      *
      * @return array<int, \Illuminate\Mail\Mailables\Attachment>
      */

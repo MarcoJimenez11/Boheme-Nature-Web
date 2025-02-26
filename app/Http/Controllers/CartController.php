@@ -7,8 +7,16 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
 
+/**
+ * 
+ * Controlador para la gestión del carrito de la compra
+ */
 class CartController extends Controller
 {
+    /**
+     * Listado de productos del carrito
+     * @return \Illuminate\Contracts\View\View
+     */
     public function list()
     {
         return view('cart.list')
@@ -17,7 +25,7 @@ class CartController extends Controller
     }
 
     /**
-     * Añade un producto al carrito, comprobando si ya existe para no añadir duplicado, sino aumentar su cantidad en 1
+     * Añade un producto al carrito, comprobando si ya existe para no añadir duplicado sino aumentar su cantidad en 1
      * 
      * @param mixed $product
      * @return mixed|\Illuminate\Http\RedirectResponse
@@ -41,6 +49,11 @@ class CartController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * Elimina un producto del carrito
+     * @param mixed $item
+     * @return mixed|\Illuminate\Http\RedirectResponse
+     */
     public function deleteItem($item)
     {
         session()->forget("cart.$item");
@@ -65,6 +78,12 @@ class CartController extends Controller
         return redirect()->back();
     }
 
+
+    /**
+     * 
+     * Elimina todos los productos del carrito (vaciar el carrito)
+     * @return mixed|\Illuminate\Http\RedirectResponse
+     */
     public function deleteAll()
     {
         session()->forget("cart");

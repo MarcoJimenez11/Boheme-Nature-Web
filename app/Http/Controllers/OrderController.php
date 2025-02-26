@@ -10,8 +10,15 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use App\Models\OrderLine;
 
+/**
+ * Controlador de pedidos
+ */
 class OrderController extends Controller
 {
+    /**
+     * Vista de listado de pedidos realizados por el usuario autenticado
+     * @return \Illuminate\Contracts\View\View
+     */
     public function list()
     {
         return view('order.list')
@@ -19,11 +26,19 @@ class OrderController extends Controller
         ->with("categories", Category::orderBy('name')->get());
     }
 
+    /**
+     * Vista de creación de un nuevo pedido (a partir de los productos del carrito)
+     * @return \Illuminate\Contracts\View\View
+     */
     public function create(){
         return view('order.create')
         ->with("categories", Category::orderBy('name')->get());
     }
 
+    /**
+     * Creación de un pedido a partir de los productos del carrito, el formulario de envío y el usuario autenticado
+     * @return mixed|\Illuminate\Http\RedirectResponse
+     */
     public function createPost(){
         if(Auth::user() == null){
             return redirect()->back()->withErrors('Debes iniciar sesión');
@@ -40,6 +55,7 @@ class OrderController extends Controller
             'orderDirection.required' => 'El campo dirección es obligatorio',
         ]);
 
+        //Crea el pedido
         $order = Order::create([
             'user_id' => $user_id,
             'province' => $data['orderProvince'],
@@ -48,6 +64,7 @@ class OrderController extends Controller
             'status' => 'Pendiente',
         ]);
 
+        //Crea las líneas del pedido a partir del carrito
         $cart = session('cart');
         foreach ($cart as $item) {
             OrderLine::create([
@@ -56,8 +73,10 @@ class OrderController extends Controller
                 'amount' => $item['amount'],
             ]);
 
+            //Decrementa el stock de los productos comprados
             Product::where('id', '=', $item['id'])->decrement('stock', $item['amount']);
         }
+        //Borra el carrito
         session()->forget('cart');
 
         //Envía email de confirmación de pedido al usuario
