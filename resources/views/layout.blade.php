@@ -5,11 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marcodona</title>
-    <link href="{{ asset('../resources/scss/principal.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('../resources/scss/principal.css') }}" rel="stylesheet"> --}}
+    {{-- <link href="{{ asset('../resources/css/app.css') }}" rel="stylesheet"> --}}
+    @vite(['resources/css/app.css', 'resources/scss/principal.scss', 'resources/js/app.js'])
     <script type="module" src={{ asset('../resources/js/categoriesMenu.js') }} defer></script>
 </head>
 
 <body>
+
     <header>
         <section>
             <h1><a href="{{ route('home') }}">Marcodona</a></h1>

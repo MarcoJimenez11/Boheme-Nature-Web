@@ -302,6 +302,10 @@ html body .pagination nav ul li {
   justify-content: space-around;
   margin: 10px;
 }
+html body #email-verification {
+  display: flex;
+  flex-direction: column;
+}
 
 footer {
   display: flex;
