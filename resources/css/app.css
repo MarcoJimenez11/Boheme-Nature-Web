@@ -1,3 +1,10 @@
 @import "tailwindcss";
 
+
 @tailwind utilities;
+
+@theme {
+    --color-primary: #24ffca;
+    --color-secondary: #24ffca;
+    --color-contrast: #24ffca;
+  }
