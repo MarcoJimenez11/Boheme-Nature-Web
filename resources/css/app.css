@@ -1,10 +1,12 @@
 @import "tailwindcss";
 
-
 @tailwind utilities;
 
-@theme {
-    --color-primary: #24ffca;
-    --color-secondary: #24ffca;
-    --color-contrast: #24ffca;
-  }
+@config "../../tailwind.config.js";
+
+/* @theme { */
+  /* --color-primary: #24ffca;
+  --color-primary-hover: '#24ffff';
+  --color-secondary: #24ffca;
+  --color-contrast: #24ffca; */
+/* } */
