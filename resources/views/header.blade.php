@@ -2,7 +2,7 @@
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto p-4">
         {{-- LOGO --}}
         <a href="{{ route('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
+            <img src="{{ asset('storage/logo.svg') }}" class="fill-current text-primary-600 h-10" alt="Logo" />
             <span class="text-primary self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Bohême Nature</span>
         </a>
 
@@ -35,7 +35,7 @@
                     class="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">Iniciar
                     Sesión</a>
                 <a href="{{ route('register') }}"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Registro</a>
+                    class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Registro</a>
             @endguest
 
             {{-- MENU BUTTON FOR MOBILE --}}
@@ -58,7 +58,7 @@
                 {{-- HOME BUTTON --}}
                 <li>
                     <a href="{{ route('home') }}"
-                        class="block py-2 px-3 text-blue-600 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-blue-500 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                        class="block py-2 px-3 text-primary-600 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-primary-600 md:p-0 dark:text-blue-500 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
                         aria-current="page">Inicio</a>
                 </li>
 

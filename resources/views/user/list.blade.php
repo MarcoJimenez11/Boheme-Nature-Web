@@ -1,51 +1,60 @@
 @extends('layoutAdmin')
 
 @section('content')
-    @if ($errors->any())
-        <section class="errorList">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+    <section class="ml-10 mr-10">
+        @include('errorAlert')
+
+        <h2 class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Lista de usuarios</h2>
+
+        <button
+            class="mb-4 mt-4 text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"><a
+                href="{{ route('register') }}">Crear usuario</a></button>
+
+
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Nombre
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Email
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Fecha de registro
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Acciones
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($users as $user)
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                            <td class="px-6 py-4">{{ $user->name }}</td>
+                            <td class="px-6 py-4">{{ $user->email }}</td>
+                            <td class="px-6 py-4">{{ $user->created_at }}</td>
+
+                            <td class="px-6 py-4">
+                                <button><a href="{{ route('userEdit', $user) }}"
+                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a></button>
+                                <form method="POST" action="{{ route('userDelete', $user) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        class="font-medium text-red-600 dark:text-red-500 hover:underline">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+        {{-- Esta sección añade la paginación. --}}
+        <section class="mt-4 flex justify-center">
+            {{ $users->links('pagination') }}
         </section>
-    @endif
-
-    <h2>Lista de usuarios</h2>
-
-    <button><a href="{{ route('register') }}">Crear usuario</a></button>
-
-
-    <table>
-        <thead>
-            <th>Nombre</th>
-            <th>Email</th>
-            <th>Fecha de registro</th>
-            <th>Acciones</th>
-        </thead>
-        <tbody>
-            @foreach ($users as $user)
-                <tr>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->created_at }}</td>
-
-                    <td>
-                        <button><a href="{{ route('userEdit', $user) }}">Editar</a></button>
-                        <form method="POST" action="{{ route('userDelete', $user) }}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Eliminar</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-
-    {{-- Esta sección añade la paginación. El parámetro de links, por alguna razón, me permite dar estilos propios(sin él no funcionan) --}}
-    <section class="pagination">
-        {{ $users->links('pagination::bootstrap-4') }}
     </section>
-
 @endsection
