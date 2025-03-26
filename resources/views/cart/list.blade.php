@@ -110,7 +110,7 @@ use App\Models\Product;
                                         </div>
                                     </div>
                                 </div>
-                                <form method="POST" action="{{ route('cartDeleteAll') }}">
+                                {{-- <form method="POST" action="{{ route('cartDeleteAll') }}">
                                     @csrf
                                     @method('DELETE')
                                     <button class="inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500" type="submit"><svg class="me-1.5 h-5 w-5" aria-hidden="true"
@@ -120,7 +120,7 @@ use App\Models\Product;
                                             stroke-linejoin="round" stroke-width="2"
                                             d="M6 18 17.94 6M18 18 6.06 6" />
                                     </svg> Vaciar carrito</button>
-                                </form>
+                                </form> --}}
                             @empty
                                 No hay ningún producto en el carrito
                             @endforelse
@@ -135,24 +135,24 @@ use App\Models\Product;
                             <div class="space-y-4">
                                 <div class="space-y-2">
                                     <dl class="flex items-center justify-between gap-4">
-                                        <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Original price
+                                        <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Precio original
                                         </dt>
                                         <dd class="text-base font-medium text-gray-900 dark:text-white">$7,592.00</dd>
                                     </dl>
 
                                     <dl class="flex items-center justify-between gap-4">
-                                        <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Savings</dt>
+                                        <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Descuento</dt>
                                         <dd class="text-base font-medium text-green-600">-$299.00</dd>
                                     </dl>
 
                                     <dl class="flex items-center justify-between gap-4">
-                                        <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Store Pickup
+                                        <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Gastos de envío
                                         </dt>
                                         <dd class="text-base font-medium text-gray-900 dark:text-white">$99</dd>
                                     </dl>
 
                                     <dl class="flex items-center justify-between gap-4">
-                                        <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Tax</dt>
+                                        <dt class="text-base font-normal text-gray-500 dark:text-gray-400">IVA</dt>
                                         <dd class="text-base font-medium text-gray-900 dark:text-white">$799</dd>
                                     </dl>
                                 </div>

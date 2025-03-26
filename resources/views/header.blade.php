@@ -1,9 +1,9 @@
-<nav class="bg-white border-gray-200 dark:bg-gray-900">
+<nav class="bg-gradient-to-b from-primary-50 via-white to-primary-50 border-b-2 border-gray-200 dark:bg-gray-900">
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto p-4">
         {{-- LOGO --}}
         <a href="{{ route('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="{{ asset('storage/logo.svg') }}" class="fill-current text-primary-600 h-10" alt="Logo" />
-            <span class="text-primary self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Bohême Nature</span>
+            {{-- <img src="{{ asset('storage/logo.svg') }}" class="fill-current text-primary-600 h-10" alt="Logo" /> --}}
+            <span class="text-primary-500 self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Jabones artesanales</span>
         </a>
 
         <div class="flex items-center md:order-2 space-x-1 md:space-x-2 rtl:space-x-reverse">

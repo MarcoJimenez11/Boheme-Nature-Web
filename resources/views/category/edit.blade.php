@@ -1,30 +1,25 @@
 @extends('layoutAdmin')
 
 @section('content')
+    <section class="mt-8 flex flex-col items-center justify-center">
+        @include('errorAlert')
 
-    @if ($errors->any())
-        <section class="errorList">
-            <h4>Corrige los siguientes errores:</h4>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </section>
-    @endif
+        <div
+            class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+            <form class="space-y-6" method="POST" action="{{ route('categoryEditPut', $category) }}">
+                @csrf
+                @method('PUT')
+                <h5 class="text-xl font-medium text-gray-900 dark:text-white">Editar Categoría: {{ $category->name }}</h5>
+                <div>
+                    <label for="categoryName"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
+                    <input type="text" name="categoryName" id="categoryName"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                        value="{{ $category->name }}" required />
+                </div>
 
-    <h2>Editar Categoría</h2>
-    <form method="POST" action="{{ route('categoryEditPut', $category) }}">
-        <!-- csrf es un token para validar el POST, evitando POST maliciosos de terceros -->
-        @csrf
-        <!-- method('PUT) especifica que el formulario enviará una petición PUT en vez de POST -->
-        @method('PUT')
-
-
-
-        <label for="categoryName">Nombre</label>
-        <input type="text" name="categoryName" value="{{ $category->name }}">
-
-        <button type="submit">Editar</button>
-    </form>
+                <x-form.button>Editar</x-form.button>
+            </form>
+        </div>
+    </section>
 @endsection

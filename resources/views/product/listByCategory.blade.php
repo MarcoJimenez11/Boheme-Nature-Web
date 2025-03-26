@@ -29,7 +29,7 @@
                         <p class="text-gray-600 dark:text-gray-400">En stock: {{ $product->stock }}</p>
                     </section>
                     @if ($product->stock > 0)
-                        <button class="mt-4 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        <button class="mt-4 w-full bg-primary-500 hover:bg-primary-700 text-white font-bold py-2 px-4 rounded">
                             <a href="{{ route('cartAdd', $product) }}">Añadir al carrito</a>
                         </button>
                     @else

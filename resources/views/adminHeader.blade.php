@@ -1,6 +1,6 @@
 @auth
     @if (Auth::user()->is_admin)
-        <nav class="bg-white border-gray-200 dark:bg-gray-900">
+        <nav class="border-b-2 bg-white border-gray-200 dark:bg-gray-900">
             <div class="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto p-4">
                 {{-- ADMIN TITLE --}}
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Menú de
