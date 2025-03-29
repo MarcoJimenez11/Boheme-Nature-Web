@@ -10,6 +10,13 @@ document.addEventListener('DOMContentLoaded', function () {
         dropdownMenu.classList.toggle('hidden');
     });
 
+    //Menú desplegable de Header al pulsar el botón de usuario
+    const dropdownButtonUser = document.getElementById('dropdownAvatarNameButton');
+    const dropdownMenuUser = document.getElementById('dropdownAvatarName');
+
+    dropdownButtonUser.addEventListener('click', function () {
+        dropdownMenuUser.classList.toggle('hidden');
+    });
 
     //Menú desplegable en vista de móvil
     const toggleButton = document.querySelector('[data-collapse-toggle="mega-menu"]');

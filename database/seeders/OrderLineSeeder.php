@@ -13,6 +13,6 @@ class OrderLineSeeder extends Seeder
      */
     public function run(): void
     {
-        OrderLine::factory(5000)->create();
+        OrderLine::factory(100)->create();
     }
 }

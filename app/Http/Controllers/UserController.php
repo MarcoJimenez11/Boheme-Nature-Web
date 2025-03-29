@@ -31,8 +31,7 @@ class UserController extends Controller
             ]);
         }
 
-        return view('product.listByCategory')
-            ->with("products", Product::orderBy('name')->paginate(20))
+        return view('home')
             ->with("categories", Category::orderBy('name')->get());
     }
 

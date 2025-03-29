@@ -14,23 +14,19 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         Category::factory()->create([
-            'name' => 'Bebidas'
+            'name' => 'Jabones'
         ]);
 
         Category::factory()->create([
-            'name' => 'Congelados'
+            'name' => 'Velas'
         ]);
 
         Category::factory()->create([
-            'name' => 'Frutas'
+            'name' => 'Sales de baño'
         ]);
 
         Category::factory()->create([
-            'name' => 'Verduras'
-        ]);
-
-        Category::factory()->create([
-            'name' => 'Refrescos'
+            'name' => 'Bombas de baño'
         ]);
     }
 }
