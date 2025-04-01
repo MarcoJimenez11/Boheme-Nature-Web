@@ -47,7 +47,7 @@ class ProductController extends Controller
             'productDescription' => 'required',
             'productPrice' => ['required', 'min:0'],
             'productStock' => ['required', 'min:0'],
-            'productImage' => 'required',
+            'productImage' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ], [
             'productCategory.required' => 'El campo categoría es obligatorio',
             'productName.required' => 'El campo nombre es obligatorio',
@@ -56,7 +56,14 @@ class ProductController extends Controller
             'productPrice.required' => 'El campo precio es obligatorio',
             'productStock.required' => 'El campo stock es obligatorio',
             'productImage.required' => 'El campo imagen es obligatorio',
+            'productImage.image' => 'El campo imagen debe ser una imagen',
+            'productImage.mimes' => 'El campo imagen debe ser un archivo de tipo: jpeg, png, jpg, gif, svg',
+            'productImage.max' => 'El campo imagen no debe ser mayor de 2MB',
         ]);
+
+        // Guarda la imagen en el almacenamiento público
+        $file = request()->file('productImage');
+        $path = $file->store('images', 'public');
 
         Product::create([
             'category_id' => $data['productCategory'],
@@ -64,7 +71,7 @@ class ProductController extends Controller
             'description' => $data['productDescription'],
             'price' => $data['productPrice'],
             'stock' => $data['productStock'],
-            'image' => $data['productImage'],
+            'image' => $path,
         ]);
 
         return redirect()->route('productList');
@@ -95,7 +102,6 @@ class ProductController extends Controller
             'productDescription' => 'required',
             'productPrice' => ['required', 'min:0'],
             'productStock' => ['required', 'min:0'],
-            'productImage' => 'required',
         ], [
             'productCategory.required' => 'El campo categoría es obligatorio',
             'productName.required' => 'El campo nombre es obligatorio',
@@ -103,8 +109,25 @@ class ProductController extends Controller
             'productDescription.required' => 'El campo descripción es obligatorio',
             'productPrice.required' => 'El campo precio es obligatorio',
             'productStock.required' => 'El campo stock es obligatorio',
-            'productImage.required' => 'El campo imagen es obligatorio',
         ]);
+
+        //Si al editar se sube una imagen nueva, se valida, se guarda y se actualiza en el producto
+        if(request()->hasFile('productImage')) {
+            request()->validate([
+                'productImage' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            ], [
+                'productImage.required' => 'El campo imagen es obligatorio',
+                'productImage.image' => 'El campo imagen debe ser una imagen',
+                'productImage.mimes' => 'El campo imagen debe ser un archivo de tipo: jpeg, png, jpg, gif, svg',
+                'productImage.max' => 'El campo imagen no debe ser mayor de 2MB',
+            ]);
+
+            // Guarda la imagen en el almacenamiento público
+            $file = request()->file('productImage');
+            $path = $file->store('images', 'public');
+        } else {
+            $path = $product->image;
+        }
 
         $product->update([
             'category_id' => $data['productCategory'],
@@ -112,7 +135,7 @@ class ProductController extends Controller
             'description' => $data['productDescription'],
             'price' => $data['productPrice'],
             'stock' => $data['productStock'],
-            'image' => $data['productImage'],
+            'image' => $path,
         ]);
 
         return redirect()->route('productList');

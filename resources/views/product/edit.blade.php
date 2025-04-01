@@ -1,51 +1,55 @@
 @extends('layoutAdmin')
 
 @section('content')
-    @if ($errors->any())
-        <section class="errorList">
-            <h4>Corrige los siguientes errores:</h4>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </section>
-    @endif
+    <section class="mt-8 flex flex-col items-center justify-center">
+        @include('errorAlert')
 
-    <h2>Editar Producto</h2>
-    <form method="POST" action="{{ route('productEditPut', $product) }}">
-        <!-- csrf es un token para validar el POST, evitando POST maliciosos de terceros -->
-        @csrf
-        <!-- method('PUT) especifica que el formulario enviará una petición PUT en vez de POST -->
-        @method('PUT')
+        <div
+            class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+            <h5 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Editar Producto</h5>
+            <form enctype="multipart/form-data" method="POST" action="{{ route('productEditPut', $product) }}">
+                @csrf
+                @method('PUT')
 
-        <label for="productName">Categoría</label>
-        <select name="productCategory">
-            @foreach ($categories as $category)
-                @if ($category->id == $product->category_id)
-                    <option value="{{ $category->id }}" selected="selected">{{ $category->name }} </option>
-                @else
-                    <option value="{{ $category->id }}">{{ $category->name }} </option>
-                @endif
-            @endforeach
+                <label for="productName"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Categoría</label>
+                <select name="productCategory"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                    @foreach ($categories as $category)
+                        @if ($category->id == $product->category_id)
+                            <option value="{{ $category->id }}" selected="selected">{{ $category->name }} </option>
+                        @else
+                            <option value="{{ $category->id }}">{{ $category->name }} </option>
+                        @endif
+                    @endforeach
 
-        </select>
+                </select>
 
-        <label for="productName">Nombre</label>
-        <input type="text" name="productName" value="{{ $product->name }}">
+                <label for="productName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
+                <input type="text" name="productName" value="{{ $product->name }}"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
 
-        <label for="productDescription">Descripción</label>
-        <input type="text" name="productDescription" value="{{ $product->description }}">
+                <label for="productDescription"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción</label>
+                <input type="text" name="productDescription" value="{{ $product->description }}"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
 
-        <label for="productPrice">Precio</label>
-        <input type="number" name="productPrice" min="0" step=".01" value="{{ $product->price }}">
+                <label for="productPrice"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Precio</label>
+                <input type="number" name="productPrice" min="0" step=".01" value="{{ $product->price }}"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
 
-        <label for="productStock">Stock</label>
-        <input type="number" name="productStock" min="0" value="{{ $product->stock }}">
+                <label for="productStock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stock</label>
+                <input type="number" name="productStock" min="0" value="{{ $product->stock }}"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
 
-        <label for="productImage">Imagen</label>
-        <input type="text" name="productImage" value="{{ $product->image }}">
+                <label for="productImage"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Imagen</label>
+                <input type="file" name="productImage" value=""
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
 
-        <button type="submit">Editar</button>
-    </form>
+                <x-form.button>Editar</x-form.button>
+            </form>
+        </div>
+    </section>
 @endsection
