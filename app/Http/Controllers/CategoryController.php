@@ -49,6 +49,7 @@ class CategoryController extends Controller
 
         Category::create([
             'name' => $data['categoryName'],
+            'order' => Category::max('order') + 1,
         ]);
 
         return redirect()->route('categoryList');
@@ -75,12 +76,18 @@ class CategoryController extends Controller
     {
         $data = request()->validate([
             'categoryName' => ['required', Rule::unique('categories','name')->ignore($category->id)],
+            'categoryOrder' => ['required', 'integer'],
         ], [
             'categoryName.required' => 'El campo nombre es obligatorio',
             'categoryName.unique' => 'Ya existe una categoría con ese nombre',
+            'categoryOrder.required' => 'El campo orden es obligatorio',
+            'categoryOrder.integer' => 'El campo orden debe ser un número entero',
         ]);
 
-        $category->update(['name' => $data['categoryName']]);
+        $category->update([
+            'name' => $data['categoryName'],
+            'order'=> $data['categoryOrder'],
+        ]);
 
         return redirect()->route('categoryList');
     }

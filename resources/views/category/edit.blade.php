@@ -17,7 +17,13 @@
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                         value="{{ $category->name }}" required />
                 </div>
-
+                <div>
+                    <label for="categoryOrder"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orden</label>
+                    <input type="number" name="categoryOrder" id="categoryOrder"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                        value="{{ $category->order }}" required/>
+                </div>
                 <x-form.button>Editar</x-form.button>
             </form>
         </div>

@@ -16,7 +16,7 @@
                     <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
                         class="w-full h-32 object-cover">
                 @else
-                    <img src="{{ asset('storage/placeholder.jpg') }}" alt="{{ $product->name }}"
+                    <img src="{{ asset('storage/images/placeholder.jpg') }}" alt="{{ $product->name }}"
                         class="w-full h-32 object-cover">
                 @endif
                 <div class="p-3">

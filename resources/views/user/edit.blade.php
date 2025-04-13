@@ -4,10 +4,9 @@
     @include('errorAlert')
 
     <section class="ml-10 mr-10">
-        <section class="flex justify-around">
             <section
                 class="flex flex-col bg-white dark:bg-gray-800 rounded-lg p-6 mb-6 border border-gray-200 dark:border-gray-700">
-                <h2 class="text-center text-2xl font-semibold mb-4">Cambiar nombre de usuario</h2>
+                <h2 class="text-primary-600 text-center text-2xl font-semibold mb-4">Cambiar nombre de usuario</h2>
                 <form method="POST" action="{{ route('userEditNamePut', $user) }}" class="max-w-sm mx-auto">
                     @csrf
                     @method('PUT')
@@ -23,7 +22,7 @@
             </section>
             <section
                 class="flex flex-col bg-white dark:bg-gray-800 rounded-lg p-6 mb-6 border border-gray-200 dark:border-gray-700">
-                <h2 class="text-center text-2xl font-semibold mb-4">Cambiar e-mail de usuario</h2>
+                <h2 class="text-primary-600 text-center text-2xl font-semibold mb-4">Cambiar e-mail de usuario</h2>
                 <form method="POST" action="{{ route('userEditEmailPut', $user) }}" class="max-w-sm mx-auto">
                     @csrf
                     @method('PUT')
@@ -35,13 +34,12 @@
                     </div>
                     <x-form.button>Confirmar</x-form.button>
                 </form>
-            </section>
         </section>
 
 
         <section
             class="flex flex-col bg-white dark:bg-gray-800 rounded-lg p-6 mb-6 border border-gray-200 dark:border-gray-700">
-            <h2 class="text-center text-2xl font-semibold mb-4">Cambiar contraseña</h2>
+            <h2 class="text-primary-600 text-center text-2xl font-semibold mb-4">Cambiar contraseña</h2>
             <form method="POST" action="{{ route('userEditPasswordPut', $user) }}" class="max-w-sm mx-auto">
                 @csrf
                 @method('PUT')
@@ -80,7 +78,7 @@
             @if (Auth::user()->is_admin)
                 <section
                     class="flex flex-col bg-white dark:bg-gray-800 rounded-lg p-6 mb-6 border border-gray-200 dark:border-gray-700">
-                    <h2 class="text-center text-2xl font-semibold mb-4">Cambiar rol de usuario</h2>
+                    <h2 class="text-primary-600 text-center text-2xl font-semibold mb-4">Cambiar rol de usuario</h2>
                     <form method="POST" action="{{ route('userEditIsAdminPut', $user) }}" class="max-w-sm mx-auto">
                         @csrf
                         @method('PUT')
