@@ -27,6 +27,6 @@ class OrderLineController extends Controller
         return view('orderline.list')
             ->with('orderLines', $orderLines)
             ->with('totalCost', $totalCost)
-            ->with("categories", Category::orderBy('name')->get());
+            ->with("categories", Category::orderBy('order')->get());
     }
 }

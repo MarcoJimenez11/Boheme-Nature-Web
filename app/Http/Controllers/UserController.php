@@ -32,7 +32,7 @@ class UserController extends Controller
         }
 
         return view('home')
-            ->with("categories", Category::orderBy('name')->get());
+            ->with("categories", Category::orderBy('order')->get());
     }
 
     /**
@@ -41,7 +41,7 @@ class UserController extends Controller
      */
     public function login()
     {
-        return view('user.login')->with("categories", Category::orderBy('name')->get());
+        return view('user.login')->with("categories", Category::orderBy('order')->get());
     }
 
     /**
@@ -106,7 +106,7 @@ class UserController extends Controller
      */
     public function register()
     {
-        return view('user.register')->with("categories", Category::orderBy('name')->get());
+        return view('user.register')->with("categories", Category::orderBy('order')->get());
     }
 
     /**
@@ -160,7 +160,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         return view('user.edit')
-            ->with('categories', Category::orderBy('name')->get())
+            ->with('categories', Category::orderBy('order')->get())
             ->with('user', $user);
     }
 
@@ -265,7 +265,7 @@ class UserController extends Controller
     {
         return view('user.list')
             ->with("users", User::orderBy('created_at')->paginate(20))
-            ->with("categories", Category::orderBy('name')->get());
+            ->with("categories", Category::orderBy('order')->get());
     }
 
     /**

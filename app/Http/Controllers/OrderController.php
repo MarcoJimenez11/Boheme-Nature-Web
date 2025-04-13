@@ -23,7 +23,7 @@ class OrderController extends Controller
     {
         return view('order.list')
         ->with('orders', Order::where('user_id', Auth::user()->id)->orderBy('created_at')->paginate(20))
-        ->with("categories", Category::orderBy('name')->get());
+        ->with("categories", Category::orderBy('order')->get());
     }
 
     /**
@@ -32,7 +32,7 @@ class OrderController extends Controller
      */
     public function create(){
         return view('order.create')
-        ->with("categories", Category::orderBy('name')->get());
+        ->with("categories", Category::orderBy('order')->get());
     }
 
     /**

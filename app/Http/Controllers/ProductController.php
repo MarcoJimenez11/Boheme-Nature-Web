@@ -22,7 +22,7 @@ class ProductController extends Controller
     {
         return view('product.list')
         ->with("products", Product::orderBy('name')->paginate(20))
-        ->with("categories", Category::orderBy('name')->get());
+        ->with("categories", Category::orderBy('order')->get());
     }
 
     /**
@@ -32,7 +32,7 @@ class ProductController extends Controller
     public function create()
     {
         return view('product.create')
-        ->with("categories", Category::orderBy('name')->get());
+        ->with("categories", Category::orderBy('order')->get());
     }
 
     /**
@@ -86,7 +86,7 @@ class ProductController extends Controller
     {
         return view('product.edit')
         ->with("product", $product)
-        ->with("categories", Category::orderBy('name')->get());
+        ->with("categories", Category::orderBy('order')->get());
     }
 
     /**
@@ -167,6 +167,6 @@ class ProductController extends Controller
         return view('product.listByCategory')
         ->with("category", $category)
         ->with("products", Product::where('category_id','=', $category->id)->orderBy('name')->paginate(20))
-        ->with("categories", Category::orderBy('name')->get());
+        ->with("categories", Category::orderBy('order')->get());
     }
 }

@@ -22,7 +22,7 @@ class CategoryController extends Controller
      */
     public function list()
     {
-        return view('category.list')->with("categories", Category::orderBy('name')->paginate(perPage: 20));
+        return view('category.list')->with("categories", Category::orderBy('order')->paginate(perPage: 20));
     }
 
     /**
@@ -31,7 +31,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('category.create')->with("categories", Category::orderBy('name')->get());
+        return view('category.create')->with("categories", Category::orderBy('order')->get());
     }
 
     /**
@@ -63,7 +63,7 @@ class CategoryController extends Controller
     {
         return view('category.edit')
         ->with("category", $category)
-        ->with("categories", Category::orderBy('name')->get());
+        ->with("categories", Category::orderBy('order')->get());
     }
 
     /**

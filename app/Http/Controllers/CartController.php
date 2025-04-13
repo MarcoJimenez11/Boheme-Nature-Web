@@ -20,7 +20,7 @@ class CartController extends Controller
     public function list()
     {
         return view('cart.list')
-            ->with("categories", Category::orderBy('name')->get())
+            ->with("categories", Category::orderBy('order')->get())
             ->with("cartItems", session('cart'));
     }
 
