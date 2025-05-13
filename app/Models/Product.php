@@ -24,6 +24,7 @@ class Product extends Model
         'description',
         'price',
         'stock',
-        'image'
+        'image',
+        'stripe_id'
     ];
 }

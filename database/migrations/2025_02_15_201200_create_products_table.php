@@ -19,6 +19,7 @@ return new class extends Migration
             $table->decimal('price', 10, 2);
             $table->integer('stock')->unsigned();
             $table->string('image');
+            $table->string('stripe_id')->nullable();
             $table->timestamps();
         });
     }

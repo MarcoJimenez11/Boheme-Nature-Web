@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\StripeController;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
@@ -21,8 +22,8 @@ class ProductController extends Controller
     public function list()
     {
         return view('product.list')
-        ->with("products", Product::orderBy('name')->paginate(20))
-        ->with("categories", Category::orderBy('order')->get());
+            ->with("products", Product::orderBy('name')->paginate(20))
+            ->with("categories", Category::orderBy('order')->get());
     }
 
     /**
@@ -32,7 +33,7 @@ class ProductController extends Controller
     public function create()
     {
         return view('product.create')
-        ->with("categories", Category::orderBy('order')->get());
+            ->with("categories", Category::orderBy('order')->get());
     }
 
     /**
@@ -65,7 +66,7 @@ class ProductController extends Controller
         $file = request()->file('productImage');
         $path = $file->store('images', 'public');
 
-        Product::create([
+        $product = Product::create([
             'category_id' => $data['productCategory'],
             'name' => $data['productName'],
             'description' => $data['productDescription'],
@@ -73,6 +74,8 @@ class ProductController extends Controller
             'stock' => $data['productStock'],
             'image' => $path,
         ]);
+
+        StripeController::CreateProductStripe($product);
 
         return redirect()->route('productList');
     }
@@ -85,8 +88,8 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         return view('product.edit')
-        ->with("product", $product)
-        ->with("categories", Category::orderBy('order')->get());
+            ->with("product", $product)
+            ->with("categories", Category::orderBy('order')->get());
     }
 
     /**
@@ -98,7 +101,7 @@ class ProductController extends Controller
     {
         $data = request()->validate([
             'productCategory' => 'required',
-            'productName' => ['required', Rule::unique('products','name')->ignore($product->id)],
+            'productName' => ['required', Rule::unique('products', 'name')->ignore($product->id)],
             'productDescription' => 'required',
             'productPrice' => ['required', 'min:0'],
             'productStock' => ['required', 'min:0'],
@@ -112,7 +115,7 @@ class ProductController extends Controller
         ]);
 
         //Si al editar se sube una imagen nueva, se valida, se guarda y se actualiza en el producto
-        if(request()->hasFile('productImage')) {
+        if (request()->hasFile('productImage')) {
             request()->validate([
                 'productImage' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             ], [
@@ -138,6 +141,8 @@ class ProductController extends Controller
             'image' => $path,
         ]);
 
+        StripeController::EditProductStripe($product);
+
         return redirect()->route('productList');
     }
 
@@ -146,15 +151,19 @@ class ProductController extends Controller
      * @param \App\Models\Product $product
      * @return mixed|\Illuminate\Http\RedirectResponse
      */
-    public function delete(Product $product){
-        try{
+    public function delete(Product $product)
+    {
+        StripeController::DeleteProductStripe($product);
+
+        try {
             $product->delete();
-        }catch(Throwable $e){
+        } catch (Throwable $e) {
             return back()->withErrors([
                 'delete' => 'No se ha podido borrar el producto',
             ]);
         }
-        
+
+
         return redirect()->route('productList');
     }
 
@@ -163,10 +172,13 @@ class ProductController extends Controller
      * @param \App\Models\Category $category
      * @return \Illuminate\Contracts\View\View
      */
-    public function listByCategory(Category $category){
+    public function listByCategory(Category $category)
+    {
         return view('product.listByCategory')
-        ->with("category", $category)
-        ->with("products", Product::where('category_id','=', $category->id)->orderBy('name')->paginate(20))
-        ->with("categories", Category::orderBy('order')->get());
+            ->with("category", $category)
+            ->with("products", Product::where('category_id', '=', $category->id)->orderBy('name')->paginate(20))
+            ->with("categories", Category::orderBy('order')->get());
     }
+
+    
 }
