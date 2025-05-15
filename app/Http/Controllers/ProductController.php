@@ -7,7 +7,7 @@ use App\Http\Controllers\StripeController;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
-use Throwable;
+use Exception;
 use Illuminate\Validation\Rule;
 
 /**
@@ -99,51 +99,57 @@ class ProductController extends Controller
      */
     public function editPut(Product $product)
     {
-        $data = request()->validate([
-            'productCategory' => 'required',
-            'productName' => ['required', Rule::unique('products', 'name')->ignore($product->id)],
-            'productDescription' => 'required',
-            'productPrice' => ['required', 'min:0'],
-            'productStock' => ['required', 'min:0'],
-        ], [
-            'productCategory.required' => 'El campo categoría es obligatorio',
-            'productName.required' => 'El campo nombre es obligatorio',
-            'productName.unique' => 'Ya existe un producto con ese nombre',
-            'productDescription.required' => 'El campo descripción es obligatorio',
-            'productPrice.required' => 'El campo precio es obligatorio',
-            'productStock.required' => 'El campo stock es obligatorio',
-        ]);
-
-        //Si al editar se sube una imagen nueva, se valida, se guarda y se actualiza en el producto
-        if (request()->hasFile('productImage')) {
-            request()->validate([
-                'productImage' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+        try {
+            $data = request()->validate([
+                'productCategory' => 'required',
+                'productName' => ['required', Rule::unique('products', 'name')->ignore($product->id)],
+                'productDescription' => 'required',
+                'productPrice' => ['required', 'min:0'],
+                'productStock' => ['required', 'min:0'],
             ], [
-                'productImage.required' => 'El campo imagen es obligatorio',
-                'productImage.image' => 'El campo imagen debe ser una imagen',
-                'productImage.mimes' => 'El campo imagen debe ser un archivo de tipo: jpeg, png, jpg, gif, svg',
-                'productImage.max' => 'El campo imagen no debe ser mayor de 2MB',
+                'productCategory.required' => 'El campo categoría es obligatorio',
+                'productName.required' => 'El campo nombre es obligatorio',
+                'productName.unique' => 'Ya existe un producto con ese nombre',
+                'productDescription.required' => 'El campo descripción es obligatorio',
+                'productPrice.required' => 'El campo precio es obligatorio',
+                'productStock.required' => 'El campo stock es obligatorio',
             ]);
 
-            // Guarda la imagen en el almacenamiento público
-            $file = request()->file('productImage');
-            $path = $file->store('images', 'public');
-        } else {
-            $path = $product->image;
+            //Si al editar se sube una imagen nueva, se valida, se guarda y se actualiza en el producto
+            if (request()->hasFile('productImage')) {
+                request()->validate([
+                    'productImage' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+                ], [
+                    'productImage.required' => 'El campo imagen es obligatorio',
+                    'productImage.image' => 'El campo imagen debe ser una imagen',
+                    'productImage.mimes' => 'El campo imagen debe ser un archivo de tipo: jpeg, png, jpg, gif, svg',
+                    'productImage.max' => 'El campo imagen no debe ser mayor de 2MB',
+                ]);
+
+                // Guarda la imagen en el almacenamiento público
+                $file = request()->file('productImage');
+                $path = $file->store('images', 'public');
+            } else {
+                $path = $product->image;
+            }
+
+            $product->update([
+                'category_id' => $data['productCategory'],
+                'name' => $data['productName'],
+                'description' => $data['productDescription'],
+                'price' => $data['productPrice'],
+                'stock' => $data['productStock'],
+                'image' => $path,
+            ]);
+
+            StripeController::EditProductStripe($product);
+
+            return redirect()->route('productList');
+        } catch (Exception $e) {
+            return back()->withErrors([
+                'edit' => 'No se ha podido editar el producto: ' . $e->getMessage(),
+            ]);
         }
-
-        $product->update([
-            'category_id' => $data['productCategory'],
-            'name' => $data['productName'],
-            'description' => $data['productDescription'],
-            'price' => $data['productPrice'],
-            'stock' => $data['productStock'],
-            'image' => $path,
-        ]);
-
-        StripeController::EditProductStripe($product);
-
-        return redirect()->route('productList');
     }
 
     /**
@@ -153,16 +159,15 @@ class ProductController extends Controller
      */
     public function delete(Product $product)
     {
-        StripeController::DeleteProductStripe($product);
 
         try {
+            StripeController::DeleteProductStripe($product);
             $product->delete();
-        } catch (Throwable $e) {
+        } catch (Exception $e) {
             return back()->withErrors([
-                'delete' => 'No se ha podido borrar el producto',
+                'delete' => 'No se ha podido borrar el producto: ' . $e->getMessage(),
             ]);
         }
-
 
         return redirect()->route('productList');
     }
@@ -179,6 +184,4 @@ class ProductController extends Controller
             ->with("products", Product::where('category_id', '=', $category->id)->orderBy('name')->paginate(20))
             ->with("categories", Category::orderBy('order')->get());
     }
-
-    
 }

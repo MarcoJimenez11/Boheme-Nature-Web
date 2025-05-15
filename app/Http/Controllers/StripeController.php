@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Exception;
+use Stripe\Exception\OAuth\InvalidRequestException;
 
 class StripeController extends Controller
 {
@@ -33,9 +34,7 @@ class StripeController extends Controller
                 'stripe_id' => $stripeProduct->id,
             ]);
         } catch (Exception $e) {
-            return back()->withErrors([
-                'stripe' => 'No se ha podido crear el producto en Stripe: ' . $e->getMessage(),
-            ]);
+            throw new Exception('Error en Stripe: ' . $e->getMessage());
         }
     }
 
@@ -63,7 +62,7 @@ class StripeController extends Controller
             if ($product->price != $price->data[0]->unit_amount / 100) {
                 // Desactiva el precio antiguo (Stripe no permite editar precios)
                 StripeController::DeactivatePricesStripe($product);
-                
+
                 // Se crea un nuevo precio
                 $stripe->prices->create([
                     'currency' => 'eur',
@@ -72,9 +71,7 @@ class StripeController extends Controller
                 ]);
             }
         } catch (Exception $e) {
-            return back()->withErrors([
-                'stripe' => 'No se ha podido editar el producto en Stripe: ' . $e->getMessage(),
-            ]);
+            throw new Exception('Error en Stripe: ' . $e->getMessage());
         }
     }
 
@@ -93,10 +90,10 @@ class StripeController extends Controller
             $stripe->products->update($product->stripe_id, [
                 'active' => false,
             ]);
+        } catch (InvalidRequestException $e) {
+            throw new InvalidRequestException('Error en Stripe por parámetros incorrectos: ' . $e->getMessage());
         } catch (Exception $e) {
-            return back()->withErrors([
-                'stripe' => 'No se ha podido eliminar el producto en Stripe: ' . $e->getMessage(),
-            ]);
+            throw new Exception('Error en Stripe: ' . $e->getMessage());
         }
     }
 
@@ -121,9 +118,7 @@ class StripeController extends Controller
                 ]);
             }
         } catch (Exception $e) {
-            return back()->withErrors([
-                'stripe' => 'No se ha podido desactivar los precios del producto en Stripe: ' . $e->getMessage(),
-            ]);
+            throw new Exception('Error en Stripe: ' . $e->getMessage());
         }
     }
 }
