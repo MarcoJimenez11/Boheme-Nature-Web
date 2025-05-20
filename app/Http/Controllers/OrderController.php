@@ -21,30 +21,35 @@ class OrderController extends Controller
      */
     public function list()
     {
+        //Devuelve los pedidos del usuario con sus líneas de pedido y productos
+        $orders = Order::with('orderLines.product')->where('user_id', Auth::user()->id);
+
         return view('order.list')
-        ->with('orders', Order::where('user_id', Auth::user()->id)->orderBy('created_at')->paginate(20))
-        ->with("categories", Category::orderBy('order')->get());
+            ->with('orders', $orders->orderBy('created_at')->paginate(20))
+            ->with("categories", Category::orderBy('order')->get());
     }
 
     /**
      * Vista de creación de un nuevo pedido (a partir de los productos del carrito)
      * @return \Illuminate\Contracts\View\View
      */
-    public function create(){
+    public function create()
+    {
         return view('order.create')
-        ->with("categories", Category::orderBy('order')->get());
+            ->with("categories", Category::orderBy('order')->get());
     }
 
     /**
      * Creación de un pedido a partir de los productos del carrito, el formulario de envío y el usuario autenticado
      * @return mixed|\Illuminate\Http\RedirectResponse
      */
-    public function createPost(){
-        if(Auth::user() == null){
+    public function createPost()
+    {
+        if (Auth::user() == null) {
             return redirect()->back()->withErrors('Debes iniciar sesión');
         }
         $user_id = Auth::user()->id;
-        
+
         $data = request()->validate([
             'orderProvince' => ['required'],
             'orderLocality' => ['required'],
@@ -80,7 +85,6 @@ class OrderController extends Controller
         session()->forget('cart');
 
         //Envía email de confirmación de pedido al usuario
-        return redirect()->route('orderEmail.send',['userEmail' => Auth::user()->email, 'order' => $order]);
-
+        return redirect()->route('orderEmail.send', ['userEmail' => Auth::user()->email, 'order' => $order]);
     }
 }

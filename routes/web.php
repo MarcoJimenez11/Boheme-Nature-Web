@@ -81,8 +81,3 @@ Route::delete('/cart/delete/', [CartController::class, 'deleteAll'])->name('cart
 Route::get('/orders', [OrderController::class, 'list'])->name('orderList')->middleware(['auth', 'verified']);
 Route::get('/orders/create', [OrderController::class, 'create'])->name('orderCreate')->middleware(['auth', 'verified']);
 Route::post('/orders/create', [OrderController::class, 'createPost'])->name('orderCreatePost')->middleware(['auth', 'verified']);
-
-/*
-    Rutas de Lineas de Pedido
-*/
-Route::get('/order/lines/{order}', [OrderLineController::class, 'list'])->name('orderLineList')->middleware(['auth', 'verified']);

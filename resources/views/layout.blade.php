@@ -7,6 +7,7 @@
     <title>Bohême Nature</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script type="module" src={{ asset('../resources/js/categoriesMenu.js') }} defer></script>
+    <script src="//unpkg.com/alpinejs" defer></script>  {{-- Script para abrir y cerrar líneas de pedido en Ver Pedidos --}}
 </head>
 
 <body>

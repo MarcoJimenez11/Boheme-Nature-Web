@@ -29,10 +29,20 @@ class Order extends Model
     ];
 
     /**
+     * La relación entre el pedido y sus líneas de pedido
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<OrderLine, Order>
+     */
+    public function orderLines()
+    {
+        return $this->hasMany(OrderLine::class);
+    }
+
+    /**
      * Devuelve el coste total del pedido según sus líneas de pedido
      * @return float|int
      */
-    public function getTotalCost(){
+    public function getTotalCost()
+    {
         $orderLines = OrderLine::where('order_id', '=', $this->id)->orderBy('created_at')->get();
         $totalCost = 0;
         foreach ($orderLines as $line) {

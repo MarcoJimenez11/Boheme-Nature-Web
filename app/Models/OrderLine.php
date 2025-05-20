@@ -23,4 +23,13 @@ class OrderLine extends Model
         'product_id',
         'amount',
     ];
+
+    /**
+     * La relación entre la línea de pedido y el producto
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Product, OrderLine>
+     */
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }
