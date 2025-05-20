@@ -30,7 +30,7 @@ use App\Models\Product;
                                                     src="{{ asset('storage/' . Product::find($item['id'])->image) }}"
                                                     alt="Imagen del producto" />
                                             @else
-                                                <img class="h-20 w-20" src="{{ asset('storage/placeholder.webp') }}"
+                                                <img class="h-20 w-20" src="{{ asset('storage/images/placeholder.jpg') }}"
                                                     alt="Imagen del producto" />
                                             @endif
                                         </a>
@@ -153,33 +153,43 @@ use App\Models\Product;
 
                             <div class="space-y-4">
                                 <div class="space-y-2">
+                                    {{-- Calcular el precio total --}}
+                                    @php
+                                        $total = 0;
+                                        foreach ($cartItems as $item) {
+                                            $total += Product::find($item['id'])->price * $item['amount'];
+                                        }
+                                    @endphp
+
                                     <dl class="flex items-center justify-between gap-4">
                                         <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Precio original
                                         </dt>
-                                        <dd class="text-base font-medium text-gray-900 dark:text-white">$7,592.00</dd>
+                                        <dd class="text-base font-medium text-gray-900 dark:text-white">{{ $total }}
+                                            €</dd>
                                     </dl>
 
-                                    <dl class="flex items-center justify-between gap-4">
+                                    {{-- <dl class="flex items-center justify-between gap-4">
                                         <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Descuento</dt>
                                         <dd class="text-base font-medium text-green-600">-$299.00</dd>
-                                    </dl>
+                                    </dl> --}}
 
-                                    <dl class="flex items-center justify-between gap-4">
+                                    {{-- <dl class="flex items-center justify-between gap-4">
                                         <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Gastos de envío
                                         </dt>
                                         <dd class="text-base font-medium text-gray-900 dark:text-white">$99</dd>
-                                    </dl>
+                                    </dl> --}}
 
-                                    <dl class="flex items-center justify-between gap-4">
+                                    {{-- <dl class="flex items-center justify-between gap-4">
                                         <dt class="text-base font-normal text-gray-500 dark:text-gray-400">IVA</dt>
                                         <dd class="text-base font-medium text-gray-900 dark:text-white">$799</dd>
-                                    </dl>
+                                    </dl> --}}
                                 </div>
 
                                 <dl
                                     class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
                                     <dt class="text-base font-bold text-gray-900 dark:text-white">Total</dt>
-                                    <dd class="text-base font-bold text-gray-900 dark:text-white">$8,191.00</dd>
+                                    <dd class="text-base font-bold text-gray-900 dark:text-white">{{ $total }} €
+                                    </dd>
                                 </dl>
                             </div>
 
@@ -194,7 +204,7 @@ use App\Models\Product;
 
                             <div class="flex items-center justify-center gap-2">
                                 <span class="text-sm font-normal text-gray-500 dark:text-gray-400"> o </span>
-                                <a href="#" title=""
+                                <a href="{{ route('productListByCategory', '1') }}" title=""
                                     class="inline-flex items-center gap-2 text-sm font-medium text-primary-700 underline hover:no-underline dark:text-primary-500">
                                     Continuar comprando
                                     <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
