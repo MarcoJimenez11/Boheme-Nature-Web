@@ -26,12 +26,13 @@ use App\Models\Product;
                                     <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
                                         <a href="#" class="shrink-0 md:order-1">
                                             @if (file_exists('storage/' . Product::find($item['id'])->image))
-                                            <img class="h-20 w-20" src="{{ asset('storage/' . Product::find($item['id'])->image) }}"
-                                                alt="Imagen del producto" />
-                                                @else
+                                                <img class="h-20 w-20"
+                                                    src="{{ asset('storage/' . Product::find($item['id'])->image) }}"
+                                                    alt="Imagen del producto" />
+                                            @else
                                                 <img class="h-20 w-20" src="{{ asset('storage/placeholder.webp') }}"
                                                     alt="Imagen del producto" />
-                                                @endif
+                                            @endif
                                         </a>
 
                                         <label for="counter-input" class="sr-only">Elige cantidad:</label>
@@ -123,7 +124,24 @@ use App\Models\Product;
                                     </svg> Vaciar carrito</button>
                                 </form> --}}
                             @empty
-                                No hay ningún producto en el carrito
+                                <section
+                                    class="flex flex-col items-center justify-center min-h-[40vh] bg-white dark:bg-gray-900">
+                                    <h2 class="text-2xl font-bold text-primary-700 dark:text-white mb-2">Tu carrito está
+                                        vacío</h2>
+                                    <p class="text-gray-500 dark:text-gray-400 mb-6 text-center max-w-md">
+                                        Aún no has añadido productos a tu carrito.<br>
+                                        Descubre nuestros productos y encuentra lo que buscas.
+                                    </p>
+                                    <a href="{{ route('productListByCategory', '1') }}"
+                                        class="inline-flex items-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 transition">
+                                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" stroke-width="2"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.35 2.7A1 1 0 0 0 7 17h10a1 1 0 0 0 .95-.68L21 9M7 13V6h13" />
+                                        </svg>
+                                        Ver tienda
+                                    </a>
+                                </section>
                             @endforelse
                         </div>
                     </div>
@@ -193,6 +211,20 @@ use App\Models\Product;
             </div>
         </section>
     @else
-        No hay ningún producto en el carrito
+        <section class="flex flex-col items-center justify-center min-h-[40vh] bg-white dark:bg-gray-900">
+            <h2 class="text-2xl font-bold text-primary-700 dark:text-white mb-2">Tu carrito está vacío</h2>
+            <p class="text-gray-500 dark:text-gray-400 mb-6 text-center max-w-md">
+                Aún no has añadido productos a tu carrito.<br>
+                Descubre nuestros productos y encuentra lo que buscas.
+            </p>
+            <a href="{{ route('productListByCategory', '1') }}"
+                class="inline-flex items-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 transition">
+                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.35 2.7A1 1 0 0 0 7 17h10a1 1 0 0 0 .95-.68L21 9M7 13V6h13" />
+                </svg>
+                Ver tienda
+            </a>
+        </section>
     @endif
 @endsection
