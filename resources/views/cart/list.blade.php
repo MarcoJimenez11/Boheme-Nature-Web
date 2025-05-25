@@ -215,7 +215,6 @@ use App\Models\Product;
                                 </a>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
