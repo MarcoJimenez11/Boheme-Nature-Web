@@ -36,7 +36,8 @@ class OrderController extends Controller
     public function create()
     {
         return view('order.create')
-            ->with("categories", Category::orderBy('order')->get());
+            ->with("categories", Category::orderBy('order')->get())
+            ->with("cartItems", session('cart'));
     }
 
     /**
@@ -48,21 +49,54 @@ class OrderController extends Controller
         if (Auth::user() == null) {
             return redirect()->back()->withErrors('Debes iniciar sesión');
         }
-        $user_id = Auth::user()->id;
+        $user = Auth::user();
 
+        //Validación de los datos del formulario
         $data = request()->validate([
             'orderProvince' => ['required'],
             'orderLocality' => ['required'],
             'orderDirection' => ['required'],
+            'stripeToken' => ['required'],
         ], [
             'orderProvince.required' => 'El campo provincia es obligatorio',
             'orderLocality.required' => 'El campo localidad es obligatorio',
             'orderDirection.required' => 'El campo dirección es obligatorio',
+            'stripeToken.required' => 'No se ha recibido el token de pago de Stripe',
         ]);
+
+        //Comprueba el carrito
+        $cart = session('cart');
+        if (!$cart || count($cart) == 0) {
+            return redirect()->back()->withErrors('El carrito está vacío');
+        }
+
+        // Calcula el precio total del pedido
+        $total = 0;
+        foreach ($cart as $item) {
+            $product = Product::find($item['id']);
+            $total += $product->price * $item['amount'];
+        }
+
+        // Realiza el pago en Stripe
+        \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
+        try {
+            $charge = \Stripe\Charge::create([
+                'amount' => intval($total * 100), // Stripe requiere la cantidad en céntimos
+                'currency' => 'eur',
+                'description' => 'Pedido en Boheme Nature',
+                'source' => $data['stripeToken'],
+                'metadata' => [
+                    'user_id' => $user->id,
+                    'email' => $user->email,
+                ],
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors('Error en el pago: ' . $e->getMessage());
+        }
 
         //Crea el pedido
         $order = Order::create([
-            'user_id' => $user_id,
+            'user_id' => $user->id,
             'province' => $data['orderProvince'],
             'locality' => $data['orderLocality'],
             'direction' => $data['orderDirection'],
@@ -70,7 +104,6 @@ class OrderController extends Controller
         ]);
 
         //Crea las líneas del pedido a partir del carrito
-        $cart = session('cart');
         foreach ($cart as $item) {
             OrderLine::create([
                 'order_id' => $order->id,
