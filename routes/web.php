@@ -81,3 +81,8 @@ Route::delete('/cart/delete/', [CartController::class, 'deleteAll'])->name('cart
 Route::get('/orders', [OrderController::class, 'list'])->name('orderList')->middleware(['auth', 'verified']);
 Route::get('/orders/create', [OrderController::class, 'create'])->name('orderCreate')->middleware(['auth', 'verified']);
 Route::post('/orders/create', [OrderController::class, 'createPost'])->name('orderCreatePost')->middleware(['auth', 'verified']);
+
+/*
+    Otras rutas
+*/
+Route::get('/contact', [EmailVerificationController::class, 'contact'])->name('contact');

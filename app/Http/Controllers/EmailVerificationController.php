@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Mail\OrderEmail;
 use App\Models\Order;
+use App\Models\Category;
 use Illuminate\Support\Facades\Mail;
 use App\Models\OrderLine;
 
@@ -61,5 +62,15 @@ class EmailVerificationController extends Controller
         Mail::to($userEmail)->send(new OrderEmail($order, $orderLines));
 
         return redirect()->route('orderList');
+    }
+
+    /**
+     * Vista de contacto con la empresa
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function contact()
+    {
+        return view('other.contact')
+            ->with("categories", Category::orderBy('order')->get());
     }
 }
