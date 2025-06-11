@@ -1,6 +1,6 @@
 FROM php:8.2-fpm
 
-# Instala extensiones necesarias
+# Instalar dependencias del sistema
 RUN apt-get update && apt-get install -y \
     nginx \
     git \
@@ -10,24 +10,25 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-    && docker-php-ext-install pdo_mysql zip
+    supervisor && \
+    docker-php-ext-install pdo_mysql zip
 
-# Copia el código
+# Configura rutas
 WORKDIR /var/www/html
 COPY . .
 
-# Instala Composer y dependencias
+# Instalar dependencias PHP
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 RUN composer install --no-dev --optimize-autoloader
 
 # Permisos
 RUN chown -R www-data:www-data storage bootstrap/cache
 
-# Copia configuración de Nginx
+# Copiar configs
 COPY docker/nginx.conf /etc/nginx/nginx.conf
+COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Expone el puerto que Railway espera
+# Exponer el puerto que Railway espera
 EXPOSE 8080
 
-# Inicia ambos procesos
-CMD ["sh", "-c", "php-fpm & nginx -g 'daemon off;'"]
+CMD ["/usr/bin/supervisord"]
