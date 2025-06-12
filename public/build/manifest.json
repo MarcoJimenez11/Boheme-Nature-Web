@@ -9,5 +9,17 @@
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true
+  },
+  "resources/js/categoriesMenu.js": {
+    "file": "assets/categoriesMenu-1pejQO8s.js",
+    "name": "categoriesMenu",
+    "src": "resources/js/categoriesMenu.js",
+    "isEntry": true
+  },
+  "resources/js/stripePaymentForm.js": {
+    "file": "assets/stripePaymentForm-DNC8_181.js",
+    "name": "stripePaymentForm",
+    "src": "resources/js/stripePaymentForm.js",
+    "isEntry": true
   }
 }

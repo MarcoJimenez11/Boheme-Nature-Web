@@ -185,5 +185,6 @@ use App\Models\Product;
     </script>
     {{-- Script de pago de Stripe --}}
     <script src="https://js.stripe.com/v3/"></script>
-    <script type="module" src={{ asset('../resources/js/stripePaymentForm.js') }} defer></script>
+    {{-- <script type="module" src={{ asset('../resources/js/stripePaymentForm.js') }} defer></script> --}}
+    @vite('resources/js/stripePaymentForm.js')
 @endsection
