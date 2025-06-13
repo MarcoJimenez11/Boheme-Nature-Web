@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marcodona</title>
-    <link href="{{ asset('../resources/sass/principal.css') }}" rel="stylesheet">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @vite('resources/js/categoriesMenu.js')
 </head>
 
