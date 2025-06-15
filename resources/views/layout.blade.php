@@ -6,11 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bohême Nature</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @vite('resources/js/categoriesMenu.js')
     <script src="//unpkg.com/alpinejs" defer></script> {{-- Script para abrir y cerrar líneas de pedido en Ver Pedidos --}}
 </head>
 
-<body>
+<body class="min-h-screen flex flex-col">
 
     <header>
 
@@ -20,7 +19,7 @@
 
     </header>
 
-    <main>
+    <main class="flex-1">
 
         <section id="content">
             @yield('content')

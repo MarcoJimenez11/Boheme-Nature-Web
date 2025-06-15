@@ -1,19 +1,13 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-8dgSmzDT.css",
+    "file": "assets/app-DpR_Im0Q.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-CgZnL3jy.js",
+    "file": "assets/app-Cixyt0Jx.js",
     "name": "app",
     "src": "resources/js/app.js",
-    "isEntry": true
-  },
-  "resources/js/categoriesMenu.js": {
-    "file": "assets/categoriesMenu-1pejQO8s.js",
-    "name": "categoriesMenu",
-    "src": "resources/js/categoriesMenu.js",
     "isEntry": true
   },
   "resources/js/stripePaymentForm.js": {

@@ -14,6 +14,10 @@ use App\Models\Category;
             class="mb-4 mt-4 text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"><a
                 href="{{ route('productCreate') }}">Crear Producto</a></button>
 
+        <button
+            class="mb-4 mt-4 text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"><a
+                href="{{ route('productSynchronize') }}">Sincronizar con Stripe</a></button>
+
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <x-table.table>
                 <x-slot name="thead">

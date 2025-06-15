@@ -61,6 +61,7 @@ Route::delete('/categories/delete/{category}', [CategoryController::class, 'dele
 Route::get('/products', [ProductController::class, 'list'])->name('productList')->middleware(['auth', 'verified']);
 Route::get('/products/create', [ProductController::class, 'create'])->name('productCreate')->middleware(['auth', 'verified']);
 Route::post('/products/create', [ProductController::class, 'createPost'])->name('productCreatePost')->middleware(['auth', 'verified']);
+Route::get('/products/synchronize', [ProductController::class, 'synchronize'])->name('productSynchronize')->middleware(['auth', 'verified']);
 Route::get('/products/edit/{product}', [ProductController::class, 'edit'])->name('productEdit')->middleware(['auth', 'verified']);
 Route::put('/products/edit/{product}', [ProductController::class, 'editPut'])->name('productEditPut')->middleware(['auth', 'verified']);
 Route::delete('/products/delete/{product}', [ProductController::class, 'delete'])->name('productDelete')->middleware(['auth', 'verified']);

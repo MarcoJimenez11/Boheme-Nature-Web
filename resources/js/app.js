@@ -14,10 +14,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const dropdownButtonUser = document.getElementById('dropdownAvatarNameButton');
     const dropdownMenuUser = document.getElementById('dropdownAvatarName');
 
-    dropdownButtonUser.addEventListener('click', function () {
-        dropdownMenuUser.classList.toggle('hidden');
-    });
-
+    if (dropdownButtonUser) {
+        dropdownButtonUser.addEventListener('click', function () {
+            dropdownMenuUser.classList.toggle('hidden');
+        });
+    }
     //Menú desplegable en vista de móvil
     const toggleButton = document.querySelector('[data-collapse-toggle="mega-menu"]');
     const megaMenu = document.getElementById('mega-menu');

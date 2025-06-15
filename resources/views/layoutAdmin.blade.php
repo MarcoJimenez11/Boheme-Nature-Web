@@ -6,10 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bohême Nature</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @vite('resources/js/categoriesMenu.js')
 </head>
 
-<body>
+<body class="min-h-screen flex flex-col">
 
     <header>
 
@@ -19,7 +18,7 @@
 
     </header>
 
-    <main>
+    <main class="flex-1">
 
         <section id="content">
             @auth

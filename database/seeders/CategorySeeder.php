@@ -24,13 +24,8 @@ class CategorySeeder extends Seeder
         ]);
 
         Category::factory()->create([
-            'name' => 'Sales de baño',
+            'name' => 'Sales y bombas de baño',
             'order'=> 3
-        ]);
-
-        Category::factory()->create([
-            'name' => 'Bombas de baño',
-            'order'=> 4
         ]);
     }
 }

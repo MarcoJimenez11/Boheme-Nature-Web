@@ -184,4 +184,20 @@ class ProductController extends Controller
             ->with("products", Product::where('category_id', '=', $category->id)->orderBy('name')->paginate(20))
             ->with("categories", Category::orderBy('order')->get());
     }
+
+    /**
+     * Sincroniza los productos con Stripe
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function synchronize()
+    {
+        try {
+            StripeController::synchronizeProducts();
+            return redirect()->route('productList')->with('message', 'Productos sincronizados con éxito.');
+        } catch (Exception $e) {
+            return back()->withErrors([
+                'synchronize' => 'No se ha podido sincronizar los productos: ' . $e->getMessage(),
+            ]);
+        }
+     }
 }

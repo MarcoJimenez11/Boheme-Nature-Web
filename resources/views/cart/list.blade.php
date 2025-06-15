@@ -81,7 +81,7 @@ use App\Models\Product;
                                             {{-- ITEM PRICE --}}
                                             <div class="text-end md:order-4 md:w-32">
                                                 <p class="text-base font-bold text-gray-900 dark:text-white">
-                                                    {{ Product::find($item['id'])->price * $item['amount'] }} €</p>
+                                                    {{ number_format(Product::find($item['id'])->price * $item['amount'],2) }} €</p>
                                             </div>
                                         </div>
 
@@ -164,7 +164,7 @@ use App\Models\Product;
                                     <dl class="flex items-center justify-between gap-4">
                                         <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Precio original
                                         </dt>
-                                        <dd class="text-base font-medium text-gray-900 dark:text-white">{{ $total }}
+                                        <dd class="text-base font-medium text-gray-900 dark:text-white">{{ number_format($total,2) }}
                                             €</dd>
                                     </dl>
 
@@ -188,7 +188,7 @@ use App\Models\Product;
                                 <dl
                                     class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
                                     <dt class="text-base font-bold text-gray-900 dark:text-white">Total</dt>
-                                    <dd class="text-base font-bold text-gray-900 dark:text-white">{{ $total }} €
+                                    <dd class="text-base font-bold text-gray-900 dark:text-white">{{ number_format($total,2) }} €
                                     </dd>
                                 </dl>
                             </div>

@@ -16,7 +16,7 @@ class StripeController extends Controller
     public static function CreateProductStripe(Product $product)
     {
         try {
-            $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+            $stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
 
             $stripeProduct = $stripe->products->create([
                 'name' => $product->name,
@@ -45,7 +45,7 @@ class StripeController extends Controller
     public static function EditProductStripe(Product $product)
     {
         try {
-            $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+            $stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
 
             $stripe->products->update(
                 $product->stripe_id,
@@ -82,7 +82,7 @@ class StripeController extends Controller
     public static function DeleteProductStripe(Product $product)
     {
         try {
-            $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+            $stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
 
             StripeController::DeactivatePricesStripe($product);
 
@@ -104,7 +104,7 @@ class StripeController extends Controller
     public static function DeactivatePricesStripe(Product $product)
     {
         try {
-            $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+            $stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
 
             // Busca los precios asociados al producto
             $prices = $stripe->prices->search([
@@ -116,6 +116,23 @@ class StripeController extends Controller
                 $stripe->prices->update($price->id, [
                     'active' => false,
                 ]);
+            }
+        } catch (Exception $e) {
+            throw new Exception('Error en Stripe: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Sincroniza los productos con Stripe
+     *
+     */
+    public static function synchronizeProducts()
+    {
+        try {
+            $products = Product::whereNull('stripe_id')->get();
+
+            foreach ($products as $product) {
+                StripeController::CreateProductStripe($product);
             }
         } catch (Exception $e) {
             throw new Exception('Error en Stripe: ' . $e->getMessage());
