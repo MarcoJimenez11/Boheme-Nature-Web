@@ -2,7 +2,7 @@
 use App\Models\Product;
 ?>
 
-<h1>¡Gracias por compar en Marcodona!</h1>
+<h1>¡Gracias por compar en Bohême Nature!</h1>
 
 <p>Tu pedido se ha realizado con éxito. Puedes seguir el estado desde nuestra página web en el apartado "Mis Pedidos"</p>
 

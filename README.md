@@ -1,4 +1,4 @@
-# Marcodona web
+# Bohême Nature
 
 
 ## Índice
@@ -28,7 +28,7 @@
 
 ## 1. Introducción
 
-Marcodona es un proyecto de aplicación web creado desde cero con el
+Bohême Nature es un proyecto de aplicación web creado desde cero con el
 framework Laravel y el lenguaje PHP.
 
 Esta aplicación web consiste en una tienda virtual que permite registrar usuarios
@@ -339,7 +339,5 @@ Para trabajar en el desarrollo de la aplicación se ha recurrido a un repositori
 Github.
 ```
 ```
-La dirección del repositorio es:
-https://github.com/MarcoJimenez11/Marcodona_Laravel
 ```
 

@@ -30,7 +30,7 @@ class OrderEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Tu pedido en Marcodona se ha realizado con éxito',
+            subject: 'Tu pedido en Bohême Nature se ha realizado con éxito',
         );
     }
 

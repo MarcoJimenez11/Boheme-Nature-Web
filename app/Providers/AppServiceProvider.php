@@ -28,12 +28,12 @@ class AppServiceProvider extends ServiceProvider
         */
         VerifyEmail::toMailUsing(function (object $notifiable, string $url) {
             return (new MailMessage)
-                ->subject('Verificación de Email de Marcodona')
+                ->subject('Verificación de Email de Bohême Nature')
                 ->greeting('¡Hola!')
-                ->line('¡Haz click en el siguiente botón para confirmar el registro de usuario en Marcodona!.')
+                ->line('¡Haz click en el siguiente botón para confirmar el registro de usuario en Bohême Nature!.')
                 ->action('Verificar Dirección de correo', $url)
                 ->line('Si no has solicitado ningún registro, puedes ignorar este correo.')
-                ->salutation('¡Gracias por confiar en Marcodona!');
+                ->salutation('¡Gracias por confiar en Bohême Nature!');
         });
     }
 }
